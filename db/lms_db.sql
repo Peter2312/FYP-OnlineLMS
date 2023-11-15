@@ -1,119 +1,448 @@
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET SQL_NOTES=0 */;
-DROP TABLE IF EXISTS activity_log;
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3308
+-- Generation Time: Nov 8, 2023 at 02:57 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `lms_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activity_log`
+--
+
 CREATE TABLE `activity_log` (
-  `activity_log_id` int(11) NOT NULL AUTO_INCREMENT,
+  `activity_log_id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `date` varchar(100) NOT NULL,
-  `action` varchar(100) NOT NULL,
-  PRIMARY KEY (`activity_log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `action` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS answer;
+--
+-- Dumping data for table `activity_log`
+--
+
+INSERT INTO `activity_log` (`activity_log_id`, `username`, `date`, `action`) VALUES
+(25, 'navdeep300', '2023-11-01 14:29:14', 'Add User peterpang');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `answer`
+--
+
 CREATE TABLE `answer` (
-  `answer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `answer_id` int(11) NOT NULL,
   `quiz_question_id` int(11) NOT NULL,
   `answer_text` varchar(100) NOT NULL,
-  `choices` varchar(3) NOT NULL,
-  PRIMARY KEY (`answer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `choices` varchar(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS assignment;
+--
+-- Dumping data for table `answer`
+--
+
+INSERT INTO `answer` (`answer_id`, `quiz_question_id`, `answer_text`, `choices`) VALUES
+(81, 32, 'john', 'A'),
+(82, 32, 'smith', 'B'),
+(83, 32, 'kevin', 'C'),
+(84, 32, 'lorayna', 'D'),
+(85, 34, 'Peso', 'A'),
+(86, 34, 'PHP Hypertext', 'B'),
+(87, 34, 'PHP Hypertext Preprocessor', 'C'),
+(88, 34, 'Philippines', 'D'),
+(89, 37, 'Preprocessor Hypertext', 'A'),
+(90, 37, 'Pull He Paps', 'B'),
+(91, 37, 'Pure Hyper Language', 'C'),
+(92, 37, 'None of the above', 'D'),
+(93, 39, '', 'A'),
+(94, 39, '', 'B'),
+(95, 39, '', 'C'),
+(96, 39, '', 'D');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assignment`
+--
+
 CREATE TABLE `assignment` (
-  `assignment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `assignment_id` int(11) NOT NULL,
   `floc` varchar(300) NOT NULL,
   `fdatein` varchar(100) NOT NULL,
   `fdesc` varchar(100) NOT NULL,
-  `_id` int(11) NOT NULL,
+  `lecturer_id` int(11) DEFAULT NULL,
   `class_id` int(11) NOT NULL,
-  `fname` varchar(100) NOT NULL,
-  PRIMARY KEY (`assignment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `fname` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS class;
+--
+-- Dumping data for table `assignment`
+--
+
+INSERT INTO `assignment` (`assignment_id`, `floc`, `fdatein`, `fdesc`, `lecturer_id`, `class_id`, `fname`) VALUES
+(32, 'admin/uploads/4865_File_6000CEM - DPP Submission - Peter Pang Kher Yong.docx', '2023-11-04 03:34:40', 'f', 20, 187, 's'),
+(33, 'admin/uploads/6540_File_PETER PANG KHER YONG Internship letter.pdf', '2023-11-06 15:50:22', 'g', 20, 187, 'g'),
+(34, 'admin/uploads/1800_File_PETER PANG KHER YONG Internship letter.pdf', '2023-11-06 16:10:39', 'r', 20, 187, 'e'),
+(35, 'admin/uploads/9063_File_PETER PANG KHER YONG Internship letter.pdf', '2023-11-06 20:10:27', 'e', 15, 187, 'w');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class`
+--
+
 CREATE TABLE `class` (
-  `class_id` int(11) NOT NULL AUTO_INCREMENT,
-  `class_name` varchar(100) NOT NULL,
-  PRIMARY KEY (`class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `class_id` int(11) NOT NULL,
+  `class_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS class_quiz;
+--
+-- Dumping data for table `class`
+--
+
+INSERT INTO `class` (`class_id`, `class_name`) VALUES
+(7, 'ME A1'),
+(8, 'ME A2'),
+(12, 'CE A1'),
+(13, 'CE A2'),
+(14, 'CE E1'),
+(15, 'CE E2'),
+(16, 'IT A1'),
+(17, 'IT A2'),
+(18, 'IT B1'),
+(19, 'IT B2'),
+(20, 'CSE A1'),
+(21, 'CSE A2'),
+(22, 'CSE B1'),
+(23, 'CSE B2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class_quiz`
+--
+
 CREATE TABLE `class_quiz` (
-  `class_quiz_id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_quiz_id` int(11) NOT NULL,
   `lecturer_class_id` int(11) DEFAULT NULL,
   `quiz_time` int(11) NOT NULL,
-  `quiz_id` int(11) NOT NULL,
-  PRIMARY KEY (`class_quiz_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `quiz_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS class_subject_overview;
+--
+-- Dumping data for table `class_quiz`
+--
+
+INSERT INTO `class_quiz` (`class_quiz_id`, `lecturer_class_id`, `quiz_time`, `quiz_id`) VALUES
+(13, 167, 3600, 3),
+(14, 167, 3600, 3),
+(15, 167, 1800, 3),
+(16, 185, 900, 0),
+(17, 197, 300, 6),
+(18, 187, 720, 6),
+(19, 187, 600, 7),
+(20, 187, 720, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class_subject_overview`
+--
+
 CREATE TABLE `class_subject_overview` (
-  `class_subject_overview_id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_subject_overview_id` int(11) NOT NULL,
   `lecturer_class_id` int(11) DEFAULT NULL,
-  `content` varchar(10000) NOT NULL,
-  PRIMARY KEY (`class_subject_overview_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `content` varchar(10000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS comments;
-CREATE TABLE `comments` (
-  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `comment_text` text NOT NULL,
-  `comment_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`comment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+--
+-- Dumping data for table `class_subject_overview`
+--
 
-DROP TABLE IF EXISTS content;
+INSERT INTO `class_subject_overview` (`class_subject_overview_id`, `lecturer_class_id`, `content`) VALUES
+(1, 167, '<p>Chapter 1</p>\r\n\r\n<p>Cha</p>\r\n'),
+(2, 197, '<p>Computer Graphics subject will teach students about how the graphics is formed on a screen. We will learn various rendering techniques and much more.</p>\r\n'),
+(4, 192, '<p>This subject is excellent</p>\r\n'),
+(5, 187, '<p>haha</p>\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `content`
+--
+
 CREATE TABLE `content` (
-  `content_id` int(11) NOT NULL AUTO_INCREMENT,
+  `content_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
-  `content` mediumtext NOT NULL,
-  PRIMARY KEY (`content_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `content` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS department;
+--
+-- Dumping data for table `content`
+--
+
+INSERT INTO `content` (`content_id`, `title`, `content`) VALUES
+(1, 'Mission', '<pre>\r\n<span style=\"font-size:16px\"><strong>Mission</strong></span></pre>\r\n\r\n<p style=\"text-align:left\"><span style=\"font-family:arial,helvetica,sans-serif; font-size:medium\"><span style=\"font-size:large\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span>&nbsp; &nbsp;<span style=\"font-size:18px\"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; A leading institution in higher and continuing education commited to engage in quality instruction, development-oriented research sustinable lucrative economic enterprise, and responsive extension and training services through relevant academic programs to empower a human resource that responds effectively to challenges in life and acts as catalyst in the holistoic development of a humane society.&nbsp;</span></p>\r\n\r\n<p style=\"text-align:left\">&nbsp;</p>\r\n'),
+(2, 'Vision', '<pre><span style=\"font-size: large;\"><strong>Vision</strong></span></pre>\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"font-size: large;\">&nbsp; Driven by its passion for continous improvement, the State College has to vigorously pursue distinction and proficieny in delivering its statutory functions to the Filipino people in the fields of education, business, agro-fishery, industrial, science and technology, through committed and competent human resource, guided by the beacon of innovation and productivity towards the heights of elevated status. </span><br /><br /></p>'),
+(3, 'History', '<pre>\r\n<span style=\"font-size:large\">HISTORY &nbsp;</span> </pre>\r\n\r\n<p style=\"text-align:justify\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ultimate University is a public educational institution that aims to provide higher technological, professional and vocational instruction and training in science, agriculture and industrial fields as well as short term or vocational courses.</p>\r\n'),
+(4, 'Footer', '<p style=\"text-align:center\">Ultimate University Online Learning Management System</p>\r\n\r\n<p style=\"text-align:center\">All Rights Reserved &reg;2023</p>\r\n'),
+(5, 'Upcoming Events', '<pre>\r\nUP COMING EVENTS</pre>\r\n\r\n<p><strong>&gt;</strong> EXAM</p>\r\n\r\n<p><strong>&gt;</strong> INTERCAMPUS MEET</p>\r\n\r\n<p><strong>&gt;</strong> DEFENSE</p>\r\n\r\n<p><strong>&gt;</strong> ENROLLMENT</p>\r\n\r\n<p>&nbsp;</p>\r\n'),
+(6, 'Title', '<p><span style=\"font-family:trebuchet ms,geneva\">Ultimate University Online Learning Management System</span></p>\r\n'),
+(7, 'News', '<pre>\r\n<span style=\"font-size:medium\"><em><strong>Recent News\r\n</strong></em></span></pre>\r\n\r\n<h2><span style=\"font-size:small\">Extension and Community Services</span></h2>\r\n\r\n<p style=\"text-align:justify\">This technology package was promoted by the College of Industrial Technology Unit is an index to offer Practical Skills and Livelihood Training Program particularly to the Ina ngTahanan of Tayabas, Barangay Zone 15, Talisay City, Negros Occidental</p>\r\n\r\n<p style=\"text-align:justify\">The respondent of this technology package were mostly &ldquo;ina&rdquo; or mothers in PurokTayabas. There were twenty mothers who responded to the call of training and enhancing their sewing skills. The beginners projects include an apron, elastics waist skirts, pillow-cover and t-shirt style top. Short sleeve blouses with buttonholes or contoured seaming are also some of the many projects introduced to the mothers. Based on the interview conducted after the culmination activity, the projects done contributed as a means of earning to the respondents.</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; In support to the thrust of the government to improve the health status of neighboring barangays, the Faculty and Staff of CHMSC ECS Fortune Towne, Bacolod City, launched its Medical Mission in Patag, Silay City. It was conducted last March 2010, to address the health needs of the people. A medical consultation is given to the residents of SitioPatag to attend to their health related problems that may need medical treatment. Medical tablets for headache, flu, fever, antibiotics and others were availed by the residents.</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;The BAYAN-ANIHAN is a Food Production Program with a battle cry of &ldquo;GOODBYE GUTOM&rdquo;, advocating its legacy &ldquo;Food on the Table for every Filipino Family&rdquo; through backyard gardening. NGO&rsquo;s, governmental organizations, private and public sectors, business sectors are the cooperating agencies that support and facilitate this project and Carlos Hilado Memorial State College (CHMSC) is one of the identified partner school. Being a member institution in advocating its thrust, the school through its Extension and Community Services had conducted capability training workshop along this program identifying two deputy coordinators and trainers last November 26,27 and 28, 2009, with the end in view of implementing the project all throughout the neighboring towns, provinces and regions to help address poverty in the country. Program beneficiaries were the selected families of GawadKalinga (GK) in Hope Village, Brgy. Cabatangan, Talisay City, with 120 families beneficiaries; GK FIAT Village in Silay City with 30 beneficiaries; Bonbon Dream Village brgy. E. Lopez, Silay City with 60 beneficiaries; and respectively Had. Teresita and Had. Carmen in Talisay City, Negros Occidental both with 60 member beneficiaries. This program was introduced to 30 household members with the end in view of alleviating the quality standards of their living.</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>\r\n\r\n<p style=\"text-align:justify\">The extension &amp; Community Services of the College conducted a series of consultations and meetings with the different local government units to assess technology needs to determines potential products to be developed considering the abundance of raw materials in their respective areas and their product marketability. The project was released in November 2009 in six cities in the province of Negros Occidental, namely San Carlos, Sagay, Silay, Bago, Himamaylan and Sipalay and the Municipality of E. B Magalona</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The City of San Carlos focused on peanut and fish processing. Sagay and bago focused on meat processing, while Silay City on fish processing. The City of Himamaylan is on sardines, and in Sipalay focused on fish processing specially on their famous BARONGAY product. The municipality of E.B Magalona focused on bangus deboning.</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The food technology instructors are tasked to provide the needed skills along with the TLDC Livelihood project that each City is embarking on while the local government units provide the training venue for the project and the training equipment and machine were provided by the Department of Science and Technology.</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>\r\n'),
+(8, 'Announcements', '<pre>\r\n<span style=\"font-size:medium\"><em><strong>Announcements</strong></em></span></pre>\r\n\r\n<p>Examination Period: October 9-11, 2023</p>\r\n\r\n<p>Semester Break: October 12- November 3, 2023</p>\r\n\r\n<p>FASKFJASKFAFASFMFAS</p>\r\n\r\n<p>GASGA</p>\r\n'),
+(10, 'Calendar', '<pre style=\"text-align:center\">\r\n<span style=\"font-size:medium\"><strong>&nbsp;CALENDAR OF EVENT</strong></span></pre>\r\n\r\n<table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" style=\"line-height:1.6em; margin-left:auto; margin-right:auto\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>First Semester &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>\r\n			</td>\r\n			<td>\r\n			<p>June 10, 2023 to October 11, 2023</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>Semester Break</p>\r\n			</td>\r\n			<td>\r\n			<p>Oct. 12, 2023 to November 3, 2023</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>Second Semester</p>\r\n			</td>\r\n			<td>\r\n			<p>Nov. 5, 2023 to March 27, 2024</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>Semester Break</p>\r\n			</td>\r\n			<td>\r\n			<p>March 27, 2024 to April 8, 2024</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>Classes Begin</p>\r\n			</td>\r\n			<td>\r\n			<p>April 8 , 2024 to May 24, 2024</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p style=\"text-align:center\">&nbsp;</p>\r\n\r\n<table cellpadding=\"0\" cellspacing=\"0\" style=\"line-height:1.6em; margin-left:auto; margin-right:auto\">\r\n	<tbody>\r\n		<tr>\r\n			<td colspan=\"4\">\r\n			<p><strong>June 5, 2023 to October 11, 2023 &ndash; First Semester AY 2023-2024</strong></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>June 4, 2013 &nbsp; &nbsp; &nbsp; &nbsp;</p>\r\n			</td>\r\n			<td>\r\n			<p>Orientation with the Parents of the University New Students</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>June 5</p>\r\n			</td>\r\n			<td>\r\n			<p>First Day of Service</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>June 5</p>\r\n			</td>\r\n			<td>\r\n			<p>College Personnel General Assembly</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>June 6,7</p>\r\n			</td>\r\n			<td>\r\n			<p>In-Service Training (Departmental)</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>June 10</p>\r\n			</td>\r\n			<td>\r\n			<p>First Day of Classes</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>June 14</p>\r\n			</td>\r\n			<td>\r\n			<p>Orientation with Students by College/Campus/Department</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>June 19,20,21</p>\r\n			</td>\r\n			<td>\r\n			<p>Branch/Campus Visit for Administrative / Academic/Accreditation/ Concerns</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td rowspan=\"2\">\r\n			<p>June</p>\r\n			</td>\r\n			<td>\r\n			<p>Club Organizations (By Discipline/Programs)</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>Student Affiliation/Induction Programs</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>July</p>\r\n			</td>\r\n			<td>\r\n			<p>Nutrition Month (Sponsor: Laboratory School)</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>July 11, 12</p>\r\n			</td>\r\n			<td>\r\n			<p>Long Tests</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>August&nbsp; 8, 9</p>\r\n			</td>\r\n			<td>\r\n			<p>Midterm Examinations</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>August 19</p>\r\n			</td>\r\n			<td>\r\n			<p>ArawngLahi</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>August 23</p>\r\n			</td>\r\n			<td>\r\n			<p>Submission of Grade Sheets for Midterm</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>August</p>\r\n			</td>\r\n			<td>\r\n			<p>Recognition Program (Dean&rsquo;s List)</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>August 26</p>\r\n			</td>\r\n			<td>\r\n			<p>National Heroes Day (Regular Holiday)</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>August 28, 29, 30</p>\r\n			</td>\r\n			<td>\r\n			<p>Sports and Cultural Meet</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>September 19,20</p>\r\n			</td>\r\n			<td>\r\n			<p>Long Tests</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>October 5</p>\r\n			</td>\r\n			<td>\r\n			<p>Teachers&rsquo; Day / World Teachers&rsquo; Day</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>October 10, 11</p>\r\n			</td>\r\n			<td>\r\n			<p>Final Examination</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>October 12</p>\r\n			</td>\r\n			<td>\r\n			<p>Semester Break</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p style=\"text-align:center\">&nbsp;</p>\r\n\r\n<table cellpadding=\"0\" cellspacing=\"0\" style=\"margin-left:auto; margin-right:auto\">\r\n	<tbody>\r\n		<tr>\r\n			<td colspan=\"4\">\r\n			<p><strong>Nov. 4, 2013 to March 27, 2014 &ndash; Second Semester AY 2013-2014</strong></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>November 4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>\r\n			</td>\r\n			<td>\r\n			<p>Start of Classes</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>November 19, 20, 21, 22</p>\r\n			</td>\r\n			<td>\r\n			<p>Intercampus Sports and Cultural Fest/College Week</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>December 5, 6</p>\r\n			</td>\r\n			<td>\r\n			<p>Long Tests</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>December 19,20</p>\r\n			</td>\r\n			<td>\r\n			<p>Thanksgiving Celebrations</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>December 21</p>\r\n			</td>\r\n			<td>\r\n			<p>Start of Christmas Vacation</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>December 25</p>\r\n			</td>\r\n			<td>\r\n			<p>Christmas Day (Regular Holiday)</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>December 30</p>\r\n			</td>\r\n			<td>\r\n			<p>Rizal Day (Regular Holiday)</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>January 6, 2024</p>\r\n			</td>\r\n			<td>\r\n			<p>Classes Resume</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>January 9, 10</p>\r\n			</td>\r\n			<td>\r\n			<p>Midterm Examinations</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>January 29</p>\r\n			</td>\r\n			<td>\r\n			<p>Submission of Grades Sheets for Midterm</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>February 13, 14</p>\r\n			</td>\r\n			<td>\r\n			<p>Long Tests</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>March 6, 7</p>\r\n			</td>\r\n			<td>\r\n			<p>Final Examinations (Graduating)</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>March 13, 14</p>\r\n			</td>\r\n			<td>\r\n			<p>Final Examinations (Non-Graduating)</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>March 17, 18, 19, 20, 21</p>\r\n			</td>\r\n			<td>\r\n			<p>Recognition / Graduation Rites</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>March 27</p>\r\n			</td>\r\n			<td>\r\n			<p>Last Day of Service for Faculty</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>June 5, 2024</p>\r\n			</td>\r\n			<td>\r\n			<p>First Day of Service for SY 2024-2025</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p style=\"text-align:center\">&nbsp;</p>\r\n\r\n<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-left:auto; margin-right:auto\">\r\n	<tbody>\r\n		<tr>\r\n			<td colspan=\"2\">\r\n			<p><strong>FLAG RAISING CEREMONY-TALISAY CAMPUS</strong></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>MONTHS &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>\r\n			</td>\r\n			<td>\r\n			<p>UNIT-IN-CHARGE</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>June, Sept. and Dec. 2023, March 2024</p>\r\n			</td>\r\n			<td>\r\n			<p>COE</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>July and October 2023, Jan. 2024</p>\r\n			</td>\r\n			<td>\r\n			<p>SAS</p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>\r\n			<p>August and November 2023, Feb. 2024</p>\r\n\r\n			<p>April and May 2024</p>\r\n			</td>\r\n			<td>\r\n			<p>CIT</p>\r\n\r\n			<p>GASS</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n'),
+(11, 'Directories', '<div class=\"jsn-article-content\" style=\"text-align: left;\">\r\n<pre>\r\n<span style=\"font-size:medium\"><em><strong>DIRECTORIES</strong></em></span></pre>\r\n\r\n<ul>\r\n	<li>Lab School - 712-0848</li>\r\n	<li>Accounting - 495-5560</li>\r\n	<li>Presidents Office - 495-4064(telefax)</li>\r\n	<li>VPA/PME - 495-1635</li>\r\n	<li>Registrar Office - 495-4657(telefax)</li>\r\n	<li>Cashier - 712-7272</li>\r\n	<li>CIT - 712-0670</li>\r\n	<li>SAS/COE - 495-6017</li>\r\n	<li>BAC - 712-8404(telefax)</li>\r\n	<li>Records - 495-3470</li>\r\n	<li>Supply - 495-3767</li>\r\n	<li>Internet Lab - 712-6144/712-6459</li>\r\n	<li>COA - 495-5748</li>\r\n	<li>Guard House - 476-1600</li>\r\n	<li>HRM - 495-4996</li>\r\n	<li>Extension - 457-2819</li>\r\n	<li>Canteen - 495-5396</li>\r\n	<li>Research - 712-8464</li>\r\n	<li>Library - 495-5143</li>\r\n	<li>OSA - 495-1152</li>\r\n</ul>\r\n</div>\r\n'),
+(12, 'president', '<p>It is my great pleasure and privilege to welcome you to CHMSC&rsquo;s official website. Accept my deep appreciation for continuously taking interest in CHMSC and its programs and activities.<br /> Recently, the challenges of the knowledge era of the 21st Century led me to think very deeply how educational institutions of higher learning must vigorously pursue relevant e<img style=\"float: left;\" src=\"images/president.jpg\" alt=\"\" />ducation to compete with and respond to the challenges of globalization. As an international fellow, I realized that in the face of this globalization and technological advancement, educational institutions are compelled to work extraordinary in educating the youths and enhancing their potentials for gainful employment and realization of their dreams to become effective citizens.<br /><br /> Honored and humbled to be given the opportunity for stewardship of this good College, I am fully aware that the goal is to make CHMSC as the center of excellence or development in various fields. The vision, CHMSC ExCELS: Excellence, Competence and Educational Leadership in Science and Technology is a profound battle cry for each member of CHMSC Community. A CHMSCian must be technologically and academically competent, socially mature, safety conscious with care for the environment, a good citizen and possesses high moral values. The way the College is being managed, the internal and the external culture of all stockholders, and the efforts for quality and excellence will result to the establishment of the good corporate image of the College. The hallmark is reflected as the image of the good institution.<br /><br /> The tasks at hand call for our full cooperation, support and active participation. Therefore, I urge everyone to help me in the crusade to <br /><br /></p>\r\n<p style=\"text-align: justify;\"><span style=\"line-height: 1.3em;\">Provide wider access to CHMSC programs;</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"line-height: 1.3em;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* Harness the potentials of students thru effective teaching and learning methodologies and techniques;</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"line-height: 1.3em;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* Enable CHMSC Environment for All through secure green campus;</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"line-height: 1.3em;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* Advocate green movement, protect intellectual property and stimulate innovation;</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"line-height: 1.3em;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* Promote lifelong learning;</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"line-height: 1.3em;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* Conduct Research and Development for community and poverty alleviation;</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"line-height: 1.3em;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* Share and disseminate knowledge through publication and extension outreach to communities; and</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"line-height: 1.3em;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*Strengthen Institute-industry linkages and public-private partnership for mutual interest.</span></p>\r\n<p style=\"text-align: justify;\"><br /><span style=\"line-height: 1.3em; text-align: justify;\">Together, WE can make CHMSC</span></p>\r\n<p style=\"text-align: justify;\"><br /><span style=\"line-height: 1.3em;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*A model green institution for Human Resources Development, a builder of human resources in the knowledge era of the 21st Century;</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"line-height: 1.3em;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; *A center for curricular innovations and research especially in education, technology, engineering, ICT and entrepreneurship; and</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"line-height: 1.3em;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; *A Provider of quality graduates in professional and technological programs for industry and community.</span></p>\r\n<p style=\"text-align: justify;\"><br /><br /> Dear readers and guests, these are the challenges for every CHMSCian to hurdle and the dreams to realize. This website will be one of the connections with you as we ardently take each step. Feel free to visit often and be kept posted as we continue to work for discoveries and advancement that will bring benefits to the lives of the students, the community, and the world, as a whole.<br /><br /> Warmest welcome and I wish you well!</p>\r\n<p style=\"text-align: justify;\"><br /><br /></p>\r\n<p style=\"text-align: justify;\">RENATO M. SOROLLA, Ph.D.<br />SUC President II</p>'),
+(13, 'motto', '<p><strong><span style=\"color:#FFF0F5\"><span style=\"font-family:arial,helvetica,sans-serif\">Ultimate University EXCELS:</span></span></strong></p>\r\n\r\n<p><strong>&quot;Strive To Serve In Excellence&quot;</strong></p>\r\n'),
+(14, 'Campuses', '<pre>\r\n<span style=\"font-size:16px\"><strong>Campuses</strong></span></pre>\r\n\r\n<ul>\r\n	<li>Penang Campus</li>\r\n	<li>Kuala Lumpur Campus</li>\r\n	<li>Johor Bahru Campus</li>\r\n	<li>Perak Campus<br />\r\n	&nbsp;</li>\r\n</ul>\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `department`
+--
+
 CREATE TABLE `department` (
-  `department_id` int(11) NOT NULL AUTO_INCREMENT,
+  `department_id` int(11) NOT NULL,
   `department_name` varchar(100) NOT NULL,
-  `dean` varchar(100) NOT NULL,
-  PRIMARY KEY (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `dean` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS discussion_posts;
-CREATE TABLE `discussion_posts` (
-  `discussion_post_id` int(11) NOT NULL AUTO_INCREMENT,
-  `lecturer_class_id` int(11) NOT NULL,
-  `lecturer_id` int(11) NOT NULL,
-  `content` text NOT NULL,
-  `date` datetime NOT NULL,
-  PRIMARY KEY (`discussion_post_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+--
+-- Dumping data for table `department`
+--
 
-DROP TABLE IF EXISTS discussion_topics;
-CREATE TABLE `discussion_topics` (
-  `topic_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
+INSERT INTO `department` (`department_id`, `department_name`, `dean`) VALUES
+(9, 'Civil Engineering', 'Krishnan'),
+(11, 'Business', 'Khor Kok Chin'),
+(12, 'Mass Comunication', 'Teng Wei Jian'),
+(13, 'Information Technology', 'Light Lau'),
+(15, 'Computer Science & Engineering', 'Asvhini Subramaniam');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `discussions`
+--
+
+CREATE TABLE `discussions` (
+  `discussion_id` int(11) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
-  `date_created` datetime NOT NULL,
-  PRIMARY KEY (`topic_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `student_id` int(11) DEFAULT NULL,
+  `lecturer_id` int(11) DEFAULT NULL,
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `lecturer_class_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-DROP TABLE IF EXISTS event;
+--
+-- Dumping data for table `discussions`
+--
+
+INSERT INTO `discussions` (`discussion_id`, `subject`, `title`, `content`, `student_id`, `lecturer_id`, `date_created`, `lecturer_class_id`) VALUES
+(36, '', '', '<p>Hello</p>\r\n', 0, 20, '2023-11-05 20:38:13', 188),
+(37, '', '', '<p>hello</p>\r\n', 0, 20, '2023-11-06 15:14:45', 187),
+(38, '', '', '<p>yo students</p>\r\n', 0, 20, '2023-11-08 16:06:12', 187),
+(39, '', '', '<p>ht</p>\r\n', 0, 20, '2023-11-08 17:18:45', 187);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `discussion_replies`
+--
+
+CREATE TABLE `discussion_replies` (
+  `reply_id` int(11) NOT NULL,
+  `reply_content` text NOT NULL,
+  `discussion_id` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `lecturer_id` int(11) DEFAULT NULL,
+  `date_replied` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `discussion_replies`
+--
+
+INSERT INTO `discussion_replies` (`reply_id`, `reply_content`, `discussion_id`, `student_id`, `lecturer_id`, `date_replied`) VALUES
+(3, '', 0, 15, 20, '2023-11-05 08:47:41'),
+(4, '', 19, 15, 0, '2023-11-05 08:50:41'),
+(5, '', 19, 15, 0, '2023-11-05 08:50:42'),
+(6, '', 19, 15, 0, '2023-11-05 08:50:42'),
+(7, '', 19, 15, 0, '2023-11-05 08:50:44'),
+(8, '', 0, 15, 0, '2023-11-05 09:02:43'),
+(9, '', 0, 20, 0, '2023-11-05 09:52:37'),
+(10, '', 19, 15, 0, '2023-11-05 11:23:38'),
+(11, '', 0, 15, 0, '2023-11-05 11:23:45'),
+(12, '', 19, 15, 0, '2023-11-05 11:25:06'),
+(13, 'hello', 19, 15, 0, '2023-11-05 11:27:50'),
+(28, 'hello', 28, 15, 15, '2023-11-05 15:26:09'),
+(29, 'hello', 27, 15, 15, '2023-11-05 15:26:09'),
+(30, 'hello', 26, 15, 15, '2023-11-05 15:26:09'),
+(31, 'hello', 25, 15, 15, '2023-11-05 15:26:09'),
+(32, 'hello', 24, 15, 15, '2023-11-05 15:26:09'),
+(33, 'hello', 23, 15, 15, '2023-11-05 15:26:09'),
+(34, 'hello', 22, 15, 15, '2023-11-05 15:26:09'),
+(35, 'hello', 21, 15, 15, '2023-11-05 15:26:09'),
+(36, 'hello', 32, 15, 15, '2023-11-05 15:26:39'),
+(37, 'hello', 31, 15, 15, '2023-11-05 15:26:39'),
+(38, 'hello', 30, 15, 15, '2023-11-05 15:26:39'),
+(39, 'hello', 29, 15, 15, '2023-11-05 15:26:39'),
+(44, 'hello', 24, 15, 15, '2023-11-05 15:26:39'),
+(45, 'hello', 23, 15, 15, '2023-11-05 15:26:39'),
+(46, 'hello', 22, 15, 15, '2023-11-05 15:26:39'),
+(47, 'hello', 21, 15, 15, '2023-11-05 15:26:39'),
+(48, 'heyyyy', 36, 25, 25, '2023-11-05 20:43:00'),
+(49, 'he', 36, 20, 0, '2023-11-05 20:49:30'),
+(50, 'efd', 36, 20, 0, '2023-11-05 20:49:34'),
+(51, 'efd', 36, 20, 0, '2023-11-05 20:56:44'),
+(52, 'haha', 36, 20, 0, '2023-11-05 20:56:49'),
+(53, 'hello', 35, 15, 15, '2023-11-06 14:48:07'),
+(54, 'hello', 34, 15, 15, '2023-11-06 14:48:07'),
+(55, 'hello', 30, 15, 15, '2023-11-06 14:48:07'),
+(56, 'hello', 35, 15, 15, '2023-11-06 14:48:46'),
+(57, 'hello', 34, 15, 15, '2023-11-06 14:48:46'),
+(58, 'hello', 30, 15, 15, '2023-11-06 14:48:46'),
+(59, 'hello miss\r\n', 35, 15, 15, '2023-11-06 14:49:01'),
+(60, 'hello miss\r\n', 34, 15, 15, '2023-11-06 14:49:01'),
+(61, 'hello miss\r\n', 30, 15, 15, '2023-11-06 14:49:01'),
+(62, 'yo miss', 35, 15, 15, '2023-11-06 14:49:10'),
+(63, 'yo miss', 34, 15, 15, '2023-11-06 14:49:10'),
+(64, 'yo miss', 30, 15, 15, '2023-11-06 14:49:10'),
+(65, 'i', 35, 15, 15, '2023-11-06 14:49:31'),
+(66, 'i', 34, 15, 15, '2023-11-06 14:49:31'),
+(67, 'i', 30, 15, 15, '2023-11-06 14:49:31'),
+(68, 's', 35, 15, 15, '2023-11-06 14:58:28'),
+(69, 'df', 35, 15, 15, '2023-11-06 14:58:33'),
+(70, '', 35, 20, 0, '2023-11-06 15:07:08'),
+(71, '', 34, 20, 0, '2023-11-06 15:07:08'),
+(72, '', 30, 20, 0, '2023-11-06 15:07:08'),
+(73, 'yo', 37, 15, 15, '2023-11-06 17:49:00'),
+(74, 'he', 36, 15, 15, '2023-11-06 19:48:01'),
+(75, 'lalala', 36, 15, 15, '2023-11-06 19:48:05'),
+(76, 'lalala', 36, 15, 15, '2023-11-06 19:49:10'),
+(77, 'is', 36, 15, 15, '2023-11-06 19:49:24'),
+(78, 'is', 36, 15, 15, '2023-11-06 19:49:28'),
+(79, 'is', 36, 15, 15, '2023-11-06 19:49:37'),
+(80, 'ok', 36, 15, 15, '2023-11-06 19:49:42'),
+(81, 'ok', 36, 15, 15, '2023-11-06 19:49:46'),
+(82, 'ok', 36, 15, 15, '2023-11-06 19:49:48'),
+(83, 'ok', 36, 15, 15, '2023-11-06 19:57:23'),
+(84, 'hello\n', 36, NULL, NULL, '2023-11-06 19:57:29'),
+(85, 'hello\n', 36, NULL, NULL, '2023-11-06 19:57:31'),
+(86, 'hello\n', 36, NULL, NULL, '2023-11-06 19:57:33'),
+(87, 'hello\n', 36, NULL, NULL, '2023-11-06 19:57:36'),
+(88, 'hello\n', 36, NULL, NULL, '2023-11-06 19:57:36'),
+(89, 'hello\n', 36, NULL, NULL, '2023-11-06 19:57:38'),
+(90, 'ok', 36, 15, 15, '2023-11-06 20:00:11'),
+(91, 'ok', 36, 15, 15, '2023-11-06 20:00:22'),
+(92, 'ok', 36, 15, 15, '2023-11-06 20:07:36'),
+(93, 'ok', 36, 15, 15, '2023-11-06 20:07:40'),
+(94, 'hah', 36, 15, 15, '2023-11-06 20:07:48'),
+(95, 'hah', 36, 15, 15, '2023-11-06 20:07:52'),
+(96, '', 0, 15, 15, '2023-11-06 20:08:33'),
+(97, 'hah', 0, 15, 15, '2023-11-06 20:09:13'),
+(98, 'hello', 36, 0, 0, '2023-11-06 20:15:35'),
+(99, 'jj', 36, 15, 15, '2023-11-06 20:16:41'),
+(100, 'bibiana', 36, 15, 15, '2023-11-06 20:17:14'),
+(101, 'iii', 37, 15, 15, '2023-11-06 20:45:17'),
+(102, 'what do you want?', 36, 25, 25, '2023-11-06 20:47:50'),
+(103, 'hello', 36, 25, 25, '2023-11-06 20:53:24'),
+(104, 'kkk', 36, 25, 25, '2023-11-06 20:53:45'),
+(105, 's', 36, 25, 25, '2023-11-06 20:55:16'),
+(106, 'ds', 36, 25, 25, '2023-11-06 20:55:27'),
+(107, 'jj', 36, 25, 25, '2023-11-06 20:59:18'),
+(108, 'jsjsd', 36, 25, 25, '2023-11-06 20:59:32'),
+(109, 'sdf', 36, 25, 25, '2023-11-06 21:04:00'),
+(110, 'what do you want', 36, 25, 25, '2023-11-06 21:05:25'),
+(111, 's', 36, 25, 25, '2023-11-06 21:08:28'),
+(112, 's', 36, 25, 25, '2023-11-06 21:10:36'),
+(113, 's', 36, 25, 25, '2023-11-06 21:15:05'),
+(114, 'sdf', 36, 25, 25, '2023-11-06 21:20:13'),
+(115, 'sd', 36, 25, 25, '2023-11-06 21:28:52'),
+(116, 'sd', 36, 25, 25, '2023-11-06 21:28:52'),
+(117, 'sa', 36, 0, 0, '2023-11-06 21:29:33'),
+(118, 'sa', 36, 0, 0, '2023-11-06 21:29:33'),
+(119, 'sd', 36, 0, 0, '2023-11-06 21:30:17'),
+(120, 'sd', 36, 0, 0, '2023-11-06 21:30:17'),
+(121, 'dsd', 36, 25, 25, '2023-11-06 21:30:33'),
+(122, 'dsd', 36, 25, 25, '2023-11-06 21:30:33'),
+(123, 'rrr', 36, 25, 25, '2023-11-06 21:30:41'),
+(124, 'rrr', 36, 25, 25, '2023-11-06 21:30:41'),
+(125, 's', 36, 25, 25, '2023-11-06 21:32:02'),
+(126, 's', 36, 25, 25, '2023-11-06 21:32:02'),
+(127, 's', 36, 25, 25, '2023-11-06 21:32:05'),
+(128, 's', 36, 25, 25, '2023-11-06 21:32:05'),
+(129, 's', 36, 25, 25, '2023-11-06 21:32:19'),
+(130, 's', 36, 25, 25, '2023-11-06 21:32:19'),
+(131, 'sdf', 36, 25, 25, '2023-11-06 21:36:21'),
+(132, 'sd', 37, 25, 25, '2023-11-06 21:37:42'),
+(133, 'sd', 37, 25, 25, '2023-11-06 21:42:45'),
+(134, 'd', 37, 25, 25, '2023-11-06 21:43:05'),
+(135, 'd', 37, 25, 25, '2023-11-06 21:43:20'),
+(136, 'rfff', 37, 25, 25, '2023-11-06 21:43:27'),
+(137, 'd', 37, 25, 25, '2023-11-06 21:44:36'),
+(138, 'fdewwe', 37, 25, 25, '2023-11-06 21:44:46'),
+(139, 's', 37, 25, 25, '2023-11-06 21:45:28'),
+(140, 'dsd', 37, 25, 25, '2023-11-06 21:52:06'),
+(141, 'sas', 37, 25, 25, '2023-11-06 21:52:28'),
+(142, 'dsa', 37, 25, 25, '2023-11-06 21:52:43'),
+(143, 'sdas', 37, 25, 25, '2023-11-06 21:53:46'),
+(144, 'sasd', 37, 25, 25, '2023-11-06 21:54:21'),
+(145, 'dasd', 37, 25, 25, '2023-11-06 21:55:48'),
+(146, 'sffs', 37, 25, 25, '2023-11-06 21:56:29'),
+(147, 'sds', 36, 20, 0, '2023-11-06 22:12:05'),
+(148, 'hello', 36, 0, 0, '2023-11-06 22:18:06'),
+(149, 'sd', 39, 0, 0, '2023-11-08 17:19:14'),
+(150, 'sd', 38, 0, 0, '2023-11-08 17:19:14'),
+(151, 'sd', 37, 0, 0, '2023-11-08 17:19:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event`
+--
+
 CREATE TABLE `event` (
-  `event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `event_id` int(11) NOT NULL,
   `event_title` varchar(100) NOT NULL,
   `lecturer_class_id` int(11) NOT NULL,
   `date_start` varchar(100) NOT NULL,
-  `date_end` varchar(100) NOT NULL,
-  PRIMARY KEY (`event_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `date_end` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS files;
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`event_id`, `event_title`, `lecturer_class_id`, `date_start`, `date_end`) VALUES
+(23, 'Mid sem break', 0, '11/08/2023', '11/16/2023'),
+(25, 'Class Test', 187, '11/30/2023', '12/01/2023');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `files`
+--
+
 CREATE TABLE `files` (
   `file_id` int(11) NOT NULL,
   `floc` varchar(500) NOT NULL,
@@ -122,11 +451,15 @@ CREATE TABLE `files` (
   `lecturer_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `fname` varchar(100) NOT NULL,
-  `uploaded_by` varchar(100) NOT NULL,
-  PRIMARY KEY (`file_id`)
+  `uploaded_by` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS lecturer;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecturer`
+--
+
 CREATE TABLE `lecturer` (
   `lecturer_id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
@@ -137,52 +470,224 @@ CREATE TABLE `lecturer` (
   `location` varchar(200) NOT NULL,
   `about` varchar(500) NOT NULL,
   `lecturer_status` varchar(20) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`lecturer_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `email` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS lecturer_backpack;
+--
+-- Dumping data for table `lecturer`
+--
+
+INSERT INTO `lecturer` (`lecturer_id`, `username`, `password`, `firstname`, `lastname`, `department_id`, `location`, `about`, `lecturer_status`, `email`) VALUES
+(20, 'asvhini', '1234', 'Asvhini', 'Subramaniam', 4, 'uploads/hihi.jpg', '', 'Registered', 'pangkheryong@gmail.com'),
+(24, 'shahriman', '1231', 'Mohd', 'Shahriman', 4, 'uploads/Diananagpal.jpg', '', 'Registered', ''),
+(28, 'kooleechun', '1231', 'Koo', 'Lee Chun', 6, 'uploads/ksmann-150x150.jpg', '', 'Registered', ''),
+(25, 'usha', '1231', 'Usha', 'Jayahkudy', 4, 'uploads/jappreet.jpg', '', 'Registered', ''),
+(26, 'wendy', '1231', 'Wendy', 'Bong', 4, 'uploads/Sukhjit.jpg', '', 'Registered', ''),
+(27, 'vasuky', '1231', 'Vasuky', 'Mohanan', 4, 'uploads/poonam.jpg', '', 'Registered', ''),
+(29, 'vaithegy', '1231', 'Vaithegy', 'Krishnan', 4, 'uploads/vivekthapar.jpg', '', 'Registered', ''),
+(30, 'lightlau', '1231', 'Light', 'Lau Teng Lye', 9, 'uploads/JNJHA.jpg', '', 'Registered', ''),
+(34, 'Katherine', 'kl#1234', 'Katherine', 'Lim', 9, '', '', 'Registered', ''),
+(0, 'a', 'y', 'r', 't', 0, '', '', 'Registered', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecturer_backpack`
+--
+
 CREATE TABLE `lecturer_backpack` (
-  `file_id` int(11) NOT NULL AUTO_INCREMENT,
+  `file_id` int(11) NOT NULL,
   `floc` varchar(100) NOT NULL,
   `fdatein` varchar(100) NOT NULL,
   `fdesc` varchar(100) NOT NULL,
   `lecturer_id` int(11) DEFAULT NULL,
-  `fname` varchar(100) NOT NULL,
-  PRIMARY KEY (`file_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `fname` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS lecturer_class;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecturer_class`
+--
+
 CREATE TABLE `lecturer_class` (
-  `lecturer_class_id` int(11) NOT NULL AUTO_INCREMENT,
+  `lecturer_class_id` int(11) NOT NULL,
   `lecturer_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
   `thumbnails` varchar(100) NOT NULL,
-  `school_year` varchar(100) NOT NULL,
-  PRIMARY KEY (`lecturer_class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `school_year` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS lecturer_class_announcements;
+--
+-- Dumping data for table `lecturer_class`
+--
+
+INSERT INTO `lecturer_class` (`lecturer_class_id`, `lecturer_id`, `class_id`, `subject_id`, `thumbnails`, `school_year`) VALUES
+(97, 9, 7, 15, 'admin/uploads/thumbnails.jpg', '2022-2023'),
+(135, 0, 22, 29, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(151, 5, 7, 14, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(152, 5, 8, 14, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(153, 5, 13, 36, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(157, 18, 15, 23, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(158, 18, 16, 23, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(159, 18, 12, 23, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(160, 18, 7, 29, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(165, 134, 15, 23, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(167, 12, 13, 35, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(168, 12, 14, 35, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(170, 12, 16, 24, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(172, 18, 13, 39, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(173, 18, 14, 39, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(174, 13, 12, 16, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(175, 13, 13, 16, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(176, 13, 14, 16, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(177, 14, 12, 32, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(178, 14, 13, 32, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(179, 14, 14, 32, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(180, 19, 13, 22, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(181, 12, 20, 24, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(183, 12, 18, 24, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(184, 12, 17, 25, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(185, 12, 7, 22, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(186, 9, 18, 42, 'admin/uploads/thumbnails.jpg', '2023-2024'),
+(187, 20, 16, 14, 'admin/uploads/thumbnails.jpg', '2025-2026'),
+(188, 20, 16, 22, 'admin/uploads/thumbnails.jpg', '2025-2026'),
+(189, 20, 12, 17, 'admin/uploads/thumbnails.jpg', '2025-2026');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecturer_class_announcements`
+--
+
 CREATE TABLE `lecturer_class_announcements` (
-  `lecturer_class_announcements_id` int(11) NOT NULL AUTO_INCREMENT,
+  `lecturer_class_announcements_id` int(11) NOT NULL,
   `content` varchar(500) NOT NULL,
   `lecturer_id` int(11) DEFAULT NULL,
   `lecturer_class_id` int(11) DEFAULT NULL,
-  `date` varchar(50) NOT NULL,
-  PRIMARY KEY (`lecturer_class_announcements_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `date` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS lecturer_class_student;
+--
+-- Dumping data for table `lecturer_class_announcements`
+--
+
+INSERT INTO `lecturer_class_announcements` (`lecturer_class_announcements_id`, `content`, `lecturer_id`, `lecturer_class_id`, `date`) VALUES
+(40, '<p>hello</p>\r\n', 20, 187, '2023-11-02 13:31:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecturer_class_student`
+--
+
 CREATE TABLE `lecturer_class_student` (
-  `lecturer_class_student_id` int(11) NOT NULL AUTO_INCREMENT,
+  `lecturer_class_student_id` int(11) NOT NULL,
   `lecturer_class_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `lecturer_id` int(11) NOT NULL,
-  PRIMARY KEY (`lecturer_class_student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=452 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `lecturer_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS lecturer_notification;
+--
+-- Dumping data for table `lecturer_class_student`
+--
+
+INSERT INTO `lecturer_class_student` (`lecturer_class_student_id`, `lecturer_class_id`, `student_id`, `lecturer_id`) VALUES
+(23, 25, 100, 20),
+(31, 165, 141, 134),
+(32, 165, 134, 134),
+(62, 167, 100, 12),
+(69, 167, 76, 12),
+(70, 167, 107, 12),
+(77, 167, 73, 12),
+(79, 167, 71, 12),
+(82, 168, 162, 12),
+(97, 168, 179, 12),
+(135, 172, 100, 18),
+(142, 172, 76, 18),
+(143, 172, 107, 18),
+(150, 172, 73, 18),
+(152, 172, 71, 18),
+(155, 173, 162, 18),
+(170, 173, 179, 18),
+(177, 174, 134, 13),
+(183, 174, 147, 13),
+(193, 174, 157, 13),
+(204, 175, 100, 13),
+(211, 175, 76, 13),
+(212, 175, 107, 13),
+(219, 175, 73, 13),
+(221, 175, 71, 13),
+(224, 176, 162, 13),
+(239, 176, 179, 13),
+(246, 177, 134, 14),
+(252, 177, 147, 14),
+(262, 177, 157, 14),
+(273, 178, 100, 14),
+(280, 178, 76, 14),
+(281, 178, 107, 14),
+(288, 178, 73, 14),
+(290, 178, 71, 14),
+(293, 179, 162, 14),
+(308, 179, 179, 14),
+(323, 180, 100, 19),
+(330, 180, 76, 19),
+(331, 180, 107, 19),
+(338, 180, 73, 19),
+(340, 180, 71, 19),
+(342, 181, 210, 12),
+(346, 183, 214, 12),
+(371, 184, 217, 12),
+(373, 185, 93, 12),
+(374, 185, 136, 12),
+(380, 186, 162, 17),
+(395, 186, 179, 17),
+(403, 187, 210, 20),
+(404, 187, 219, 20),
+(410, 190, 210, 14),
+(411, 190, 219, 14),
+(415, 192, 210, 24),
+(416, 192, 219, 24),
+(417, 192, 220, 24),
+(418, 192, 221, 24),
+(419, 192, 222, 24),
+(424, 194, 227, 24),
+(425, 194, 228, 24),
+(426, 195, 229, 24),
+(427, 195, 230, 24),
+(429, 196, 223, 24),
+(430, 196, 224, 24),
+(431, 196, 225, 24),
+(432, 196, 226, 24),
+(433, 197, 223, 20),
+(434, 197, 224, 20),
+(435, 197, 225, 20),
+(436, 197, 226, 20),
+(439, 198, 219, 20),
+(440, 198, 220, 20),
+(441, 198, 221, 20),
+(442, 198, 222, 20),
+(443, 0, 100, 20),
+(446, 0, 71, 20),
+(447, 0, 231, 20),
+(448, 0, 15, 20),
+(449, 0, 93, 20),
+(450, 187, 107, 20),
+(452, 187, 56, 20),
+(453, 187, 15, 20),
+(454, 187, 71, 20),
+(455, 187, 25, 20),
+(456, 188, 232, 20),
+(457, 188, 15, 20),
+(458, 188, 25, 20);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecturer_notification`
+--
+
 CREATE TABLE `lecturer_notification` (
   `lecturer_notification_id` int(11) NOT NULL,
   `lecturer_class_id` int(11) DEFAULT NULL,
@@ -190,11 +695,15 @@ CREATE TABLE `lecturer_notification` (
   `date_of_notification` varchar(100) NOT NULL,
   `link` varchar(100) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `assignment_id` int(11) NOT NULL,
-  PRIMARY KEY (`lecturer_notification_id`)
+  `assignment_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS lecturer_shared;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecturer_shared`
+--
+
 CREATE TABLE `lecturer_shared` (
   `lecturer_shared_id` int(11) NOT NULL,
   `lecturer_id` int(11) DEFAULT NULL,
@@ -202,102 +711,360 @@ CREATE TABLE `lecturer_shared` (
   `floc` varchar(100) NOT NULL,
   `fdatein` varchar(100) NOT NULL,
   `fdesc` varchar(100) NOT NULL,
-  `fname` varchar(100) NOT NULL,
-  PRIMARY KEY (`lecturer_shared_id`)
+  `fname` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS message;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message`
+--
+
 CREATE TABLE `message` (
-  `message_id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_id` int(11) NOT NULL,
   `reciever_id` int(11) NOT NULL,
   `content` varchar(200) NOT NULL,
   `date_sended` varchar(100) NOT NULL,
   `sender_id` int(11) NOT NULL,
   `reciever_name` varchar(50) NOT NULL,
   `sender_name` varchar(200) NOT NULL,
-  `message_status` varchar(100) NOT NULL,
-  PRIMARY KEY (`message_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `message_status` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS message_sent;
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`message_id`, `reciever_id`, `content`, `date_sended`, `sender_id`, `reciever_name`, `sender_name`, `message_status`) VALUES
+(35, 20, 'hello', '2023-11-04 03:15:35', 15, 'Asvhini Subramaniam', 'Peter Pang Kher Yong', 'read'),
+(36, 15, 'hello peter', '2023-11-04 16:35:05', 20, 'Peter Pang Kher Yong', 'Asvhini Subramaniam', 'read'),
+(37, 15, 'miss, I am struggling on FYP!!!!', '2023-11-04 16:35:36', 20, 'Peter Pang Kher Yong', 'Asvhini Subramaniam', 'read'),
+(38, 20, 'Hi miss', '2023-11-04 16:36:23', 20, 'Asvhini Subramaniam', ' ', 'read'),
+(39, 15, 'hello peter', '2023-11-04 16:43:37', 15, 'Peter Pang Kher Yong', ' ', 'read'),
+(40, 20, 'hi miss', '2023-11-04 16:44:27', 15, 'Asvhini Subramaniam', 'Peter Pang Kher Yong', 'read'),
+(45, 20, 'yo', '2023-11-05 14:10:24', 15, 'Asvhini Subramaniam', 'Peter Pang Kher Yong', 'read'),
+(47, 20, 'ssd', '2023-11-09 00:10:54', 15, 'Asvhini Subramaniam', 'Peter Pang Kher Yong', ''),
+(48, 20, 'I love you miss', '2023-11-15 00:26:30', 15, 'Asvhini Subramaniam', 'Peter Pang Kher Yong', ''),
+(50, 20, 'I want to ponteng class', '2023-11-15 00:29:21', 20, 'Asvhini Subramaniam', ' ', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message_sent`
+--
+
 CREATE TABLE `message_sent` (
-  `message_sent_id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_sent_id` int(11) NOT NULL,
   `reciever_id` int(11) NOT NULL,
   `content` varchar(200) NOT NULL,
   `date_sended` varchar(100) NOT NULL,
   `sender_id` int(11) NOT NULL,
   `reciever_name` varchar(100) NOT NULL,
-  `sender_name` varchar(100) NOT NULL,
-  PRIMARY KEY (`message_sent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `sender_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS notification;
+--
+-- Dumping data for table `message_sent`
+--
+
+INSERT INTO `message_sent` (`message_sent_id`, `reciever_id`, `content`, `date_sended`, `sender_id`, `reciever_name`, `sender_name`) VALUES
+(20, 20, 'hello', '2023-11-04 03:15:35', 15, 'Asvhini Subramaniam', 'Peter Pang Kher Yong'),
+(21, 15, 'hello peter', '2023-11-04 16:35:05', 20, 'Peter Pang Kher Yong', 'Asvhini Subramaniam'),
+(22, 15, 'miss, I am struggling on FYP!!!!', '2023-11-04 16:35:36', 20, 'Peter Pang Kher Yong', 'Asvhini Subramaniam'),
+(23, 20, 'Hi miss', '2023-11-04 16:36:23', 20, 'Asvhini Subramaniam', ' '),
+(24, 15, 'hello peter', '2023-11-04 16:43:37', 15, 'Peter Pang Kher Yong', ' '),
+(25, 20, 'hi miss', '2023-11-04 16:44:27', 15, 'Asvhini Subramaniam', 'Peter Pang Kher Yong'),
+(27, 20, 'Hello miss', '2023-11-05 14:06:52', 15, 'Asvhini Subramaniam', 'Peter Pang Kher Yong'),
+(28, 15, 'hello peter', '2023-11-05 14:07:48', 20, 'Peter Pang Kher Yong', 'Asvhini Subramaniam'),
+(30, 20, 'yo', '2023-11-05 14:10:24', 15, 'Asvhini Subramaniam', 'Peter Pang Kher Yong'),
+(32, 20, 'ssd', '2023-11-09 00:10:54', 15, 'Asvhini Subramaniam', 'Peter Pang Kher Yong'),
+(34, 15, 'Please siam', '2023-11-15 00:28:12', 20, 'Peter Pang Kher Yong', 'Asvhini Subramaniam'),
+(35, 20, 'I want to ponteng class', '2023-11-15 00:29:21', 20, 'Asvhini Subramaniam', ' ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification`
+--
+
 CREATE TABLE `notification` (
-  `notification_id` int(11) NOT NULL AUTO_INCREMENT,
+  `notification_id` int(11) NOT NULL,
   `lecturer_class_id` int(11) DEFAULT NULL,
   `notification` varchar(100) NOT NULL,
   `date_of_notification` varchar(50) NOT NULL,
-  `link` varchar(100) NOT NULL,
-  PRIMARY KEY (`notification_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `link` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS notification_read;
+--
+-- Dumping data for table `notification`
+--
+
+INSERT INTO `notification` (`notification_id`, `lecturer_class_id`, `notification`, `date_of_notification`, `link`) VALUES
+(36, 187, 'Add Assignment file name <b>s</b>', '2023-11-04 03:34:40', 'assignment_student.php'),
+(37, 187, 'Add Practice Quiz file', '2023-11-04 03:49:27', 'student_quiz_list.php'),
+(38, 187, 'Add Practice Quiz file', '2023-11-05 00:49:16', 'student_quiz_list.php'),
+(39, 187, 'New Discussion', '2023-11-05 20:52:42', 'discussion_board_student.php'),
+(40, 187, 'New Discussion', '2023-11-05 20:52:48', 'discussion_board_student.php'),
+(41, 187, 'New Discussion', '2023-11-05 20:53:34', 'discussion_board_student.php'),
+(42, 187, 'New Discussion', '2023-11-05 21:29:42', 'discussion_board_student.php'),
+(43, 187, 'New Discussion', '2023-11-05 21:30:21', 'discussion_board_student.php'),
+(44, 187, 'New Discussion', '2023-11-05 21:59:54', 'discussion_board_lecturer.php'),
+(45, 187, 'New Discussion', '2023-11-05 22:25:59', 'discussion_board_lecturer.php'),
+(46, 187, 'New Discussion', '2023-11-05 22:46:08', 'discussion_board_lecturer.php'),
+(47, 187, 'New Discussion Board Created', '2023-11-05 22:50:52', 'discussion_board_student.php'),
+(48, 187, 'New Discussion Board Created', '2023-11-05 22:56:10', 'discussion_board_student.php'),
+(49, 187, 'New Discussion Board Created', '2023-11-05 23:01:19', 'discussion_board_student.php'),
+(50, 187, 'New Discussion Board Created', '2023-11-05 23:25:39', 'discussion_board_student.php'),
+(51, 187, 'New Discussion Board Created', '2023-11-05 23:30:29', 'discussion_board_student.php'),
+(52, 187, 'New Discussion Board Created', '2023-11-06 01:30:25', 'discussion_board_student.php'),
+(53, 187, 'New Discussion Board Created', '2023-11-06 02:51:06', 'discussion_board_student.php'),
+(54, 188, 'New Discussion Board Created', '2023-11-06 04:38:13', 'discussion_board_student.php'),
+(55, 187, 'Add Assignment file name <b>g</b>', '2023-11-06 15:50:22', 'assignment_student.php'),
+(56, 187, 'Add Assignment file name <b>e</b>', '2023-11-06 16:10:39', 'assignment_student.php'),
+(57, 0, 'Add Assignment file name <b>t</b>', '2023-11-06 16:31:19', 'assignment_student.php'),
+(58, 0, 'Add Assignment file name <b>r</b>', '2023-11-06 16:32:55', 'assignment_student.php'),
+(59, 0, 'Add Assignment file name <b>r</b>', '2023-11-06 16:33:20', 'assignment_student.php'),
+(60, 0, 'Add Assignment file name <b>tr</b>', '2023-11-06 16:36:18', 'assignment_student.php'),
+(61, 0, 'Add Assignment file name <b>d</b>', '2023-11-06 16:38:39', 'assignment_student.php'),
+(62, 0, 'Add Assignment file name <b>a</b>', '2023-11-06 19:07:31', 'assignment_student.php'),
+(63, 187, 'Add Assignment file name <b>w</b>', '2023-11-06 20:10:27', 'assignment_student.php'),
+(64, 0, 'Add Assignment file name <b>e</b>', '2023-11-06 20:10:50', 'assignment_student.php'),
+(65, 187, 'New Discussion Board Created', '2023-11-06 23:14:45', 'discussion_board_student.php'),
+(66, 187, 'New Discussion Board Created', '2023-11-09 00:06:12', 'discussion_board_student.php'),
+(67, 187, 'Add Practice Quiz file', '2023-11-09 00:13:46', 'student_quiz_list.php'),
+(68, 187, 'New Discussion Board Created', '2023-11-09 01:18:45', 'discussion_board_student.php'),
+(69, 0, 'Add Assignment file name <b>e</b>', '2023-11-09 04:07:19', 'assignment_student.php'),
+(70, 0, 'Add Assignment file name <b>e</b>', '2023-11-09 04:07:57', 'assignment_student.php');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification_read`
+--
+
 CREATE TABLE `notification_read` (
-  `notification_read_id` int(11) NOT NULL AUTO_INCREMENT,
+  `notification_read_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `student_read` varchar(50) NOT NULL,
-  `notification_id` int(11) NOT NULL,
-  PRIMARY KEY (`notification_read_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `notification_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS notification_read_lecturer;
+--
+-- Dumping data for table `notification_read`
+--
+
+INSERT INTO `notification_read` (`notification_read_id`, `student_id`, `student_read`, `notification_id`) VALUES
+(1, 225, 'yes', 15),
+(2, 225, 'yes', 16),
+(3, 225, 'yes', 17),
+(4, 15, 'yes', 20),
+(5, 15, 'yes', 19),
+(6, 100, 'yes', 20),
+(7, 100, 'yes', 19),
+(8, 15, 'yes', 23),
+(9, 15, 'yes', 23),
+(10, 15, 'yes', 23),
+(11, 15, 'yes', 23),
+(12, 15, 'yes', 14),
+(13, 15, 'yes', 14),
+(14, 15, 'yes', 14),
+(15, 15, 'yes', 14),
+(16, 15, 'yes', 13),
+(17, 15, 'yes', 13),
+(18, 15, 'yes', 13),
+(19, 15, 'yes', 13),
+(20, 15, 'yes', 12),
+(21, 15, 'yes', 12),
+(22, 15, 'yes', 12),
+(23, 15, 'yes', 12),
+(24, 15, 'yes', 11),
+(25, 15, 'yes', 11),
+(26, 15, 'yes', 11),
+(27, 15, 'yes', 11),
+(28, 15, 'yes', 8),
+(29, 15, 'yes', 8),
+(30, 15, 'yes', 8),
+(31, 15, 'yes', 8),
+(32, 15, 'yes', 7),
+(33, 15, 'yes', 7),
+(34, 15, 'yes', 7),
+(35, 15, 'yes', 7),
+(36, 15, 'yes', 6),
+(37, 15, 'yes', 6),
+(38, 15, 'yes', 6),
+(39, 15, 'yes', 6),
+(40, 15, 'yes', 4),
+(41, 15, 'yes', 4),
+(42, 15, 'yes', 4),
+(43, 15, 'yes', 4),
+(44, 15, 'yes', 30),
+(45, 15, 'yes', 30),
+(46, 15, 'yes', 30),
+(47, 15, 'yes', 30),
+(48, 15, 'yes', 29),
+(49, 15, 'yes', 29),
+(50, 15, 'yes', 29),
+(51, 15, 'yes', 29),
+(52, 15, 'yes', 28),
+(53, 15, 'yes', 28),
+(54, 15, 'yes', 28),
+(55, 15, 'yes', 28),
+(56, 15, 'yes', 27),
+(57, 15, 'yes', 27),
+(58, 15, 'yes', 27),
+(59, 15, 'yes', 27),
+(60, 15, 'yes', 26),
+(61, 15, 'yes', 26),
+(62, 15, 'yes', 26),
+(63, 15, 'yes', 26),
+(64, 15, 'yes', 25),
+(65, 15, 'yes', 25),
+(66, 15, 'yes', 25),
+(67, 15, 'yes', 25),
+(68, 15, 'yes', 24),
+(69, 15, 'yes', 24),
+(70, 15, 'yes', 24),
+(71, 15, 'yes', 24),
+(72, 15, 'yes', 31),
+(73, 15, 'yes', 31),
+(74, 15, 'yes', 32),
+(75, 15, 'yes', 32),
+(76, 15, 'yes', 32),
+(77, 15, 'yes', 32),
+(78, 15, 'yes', 33),
+(79, 15, 'yes', 33),
+(80, 15, 'yes', 33),
+(82, 25, 'yes', 38),
+(83, 25, 'yes', 37),
+(84, 25, 'yes', 36),
+(85, 25, 'yes', 51),
+(86, 25, 'yes', 50),
+(87, 25, 'yes', 49),
+(88, 25, 'yes', 48),
+(89, 25, 'yes', 47),
+(90, 25, 'yes', 46),
+(91, 25, 'yes', 45),
+(92, 25, 'yes', 44),
+(93, 25, 'yes', 43),
+(94, 25, 'yes', 42),
+(95, 25, 'yes', 41),
+(96, 25, 'yes', 40),
+(97, 25, 'yes', 39),
+(98, 25, 'yes', 65),
+(99, 25, 'yes', 63),
+(100, 25, 'yes', 56),
+(101, 25, 'yes', 55),
+(102, 25, 'yes', 54),
+(103, 25, 'yes', 53),
+(104, 25, 'yes', 52);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification_read_lecturer`
+--
+
 CREATE TABLE `notification_read_lecturer` (
   `notification_read_lecturer_id` int(11) NOT NULL,
   `lecturer_id` int(11) DEFAULT NULL,
   `student_read` varchar(100) NOT NULL,
-  `notification_id` int(11) NOT NULL,
-  PRIMARY KEY (`notification_read_lecturer_id`)
+  `notification_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS question_type;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_type`
+--
+
 CREATE TABLE `question_type` (
   `question_type_id` int(11) NOT NULL,
-  `question_type` varchar(150) NOT NULL,
-  PRIMARY KEY (`question_type_id`)
+  `question_type` varchar(150) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS quiz;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz`
+--
+
 CREATE TABLE `quiz` (
-  `quiz_id` int(11) NOT NULL AUTO_INCREMENT,
+  `quiz_id` int(11) NOT NULL,
   `quiz_title` varchar(50) NOT NULL,
   `quiz_description` varchar(100) NOT NULL,
   `date_added` varchar(100) NOT NULL,
-  `lecturer_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`quiz_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `lecturer_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS quiz_question;
+--
+-- Dumping data for table `quiz`
+--
+
+INSERT INTO `quiz` (`quiz_id`, `quiz_title`, `quiz_description`, `date_added`, `lecturer_id`) VALUES
+(3, 'Sample Test', 'Test', '2023-10-03 23:01:56', 12),
+(4, 'Chapter 1', 'topics', '2023-10-13 01:51:02', 14),
+(5, 'test3', '123', '2023-10-16 04:12:07', 12),
+(6, 'PHP', 'Basics of PHP', '2023-10-18 21:27:03', 20),
+(7, 'Hello', 's', '2023-10-29 04:13:24', 20),
+(8, 'he', 'w', '2023-10-30 19:41:53', 24);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_question`
+--
+
 CREATE TABLE `quiz_question` (
-  `quiz_question_id` int(11) NOT NULL AUTO_INCREMENT,
+  `quiz_question_id` int(11) NOT NULL,
   `quiz_id` int(11) NOT NULL,
   `question_text` varchar(100) NOT NULL,
   `question_type_id` int(11) NOT NULL,
   `points` int(11) NOT NULL,
   `date_added` varchar(100) NOT NULL,
-  `answer` varchar(100) NOT NULL,
-  PRIMARY KEY (`quiz_question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `answer` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS school_year;
+--
+-- Dumping data for table `quiz_question`
+--
+
+INSERT INTO `quiz_question` (`quiz_question_id`, `quiz_id`, `question_text`, `question_type_id`, `points`, `date_added`, `answer`) VALUES
+(33, 5, '<p>q</p>\r\n', 2, 0, '2014-01-17 04:15:03', 'False'),
+(34, 3, '<p>Php Stands for ?</p>\r\n', 1, 0, '2014-01-17 12:25:17', 'C'),
+(35, 3, '<p>Echo is a Php code that display the output.</p>\r\n', 2, 0, '2014-01-17 12:26:18', 'True'),
+(36, 6, '<p>Is php a server side language ?</p>\r\n', 2, 0, '2015-12-18 21:27:33', 'True'),
+(37, 6, '<p>PHP stand for ?</p>\r\n', 1, 0, '2015-12-18 21:28:52', 'A'),
+(38, 6, '<p>Php can&#39;t be used for Bigger Projects ?</p>\r\n', 2, 0, '2015-12-18 21:30:20', 'False'),
+(39, 8, '<p>we?<br />\r\nsffwq<br />\r\n&nbsp;</p>\r\n', 1, 0, '2023-10-30 19:42:13', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `school_year`
+--
+
 CREATE TABLE `school_year` (
-  `school_year_id` int(11) NOT NULL AUTO_INCREMENT,
-  `school_year` varchar(100) NOT NULL,
-  PRIMARY KEY (`school_year_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `school_year_id` int(11) NOT NULL,
+  `school_year` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS student;
+--
+-- Dumping data for table `school_year`
+--
+
+INSERT INTO `school_year` (`school_year_id`, `school_year`) VALUES
+(2, '2023-2024'),
+(3, '2024-2025'),
+(4, '2025-2026');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
 CREATE TABLE `student` (
-  `student_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
   `firstname` varchar(100) NOT NULL,
   `lastname` varchar(100) NOT NULL,
   `class_id` int(11) NOT NULL,
@@ -305,137 +1072,609 @@ CREATE TABLE `student` (
   `password` varchar(100) NOT NULL,
   `location` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`student_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=232 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `email` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS student_assignment;
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`student_id`, `firstname`, `lastname`, `class_id`, `username`, `password`, `location`, `status`, `email`) VALUES
+(56, 'Chng', 'Kai Siang', 13, '21100303', '1234', 'uploads/jamila.jpg', 'Registered', 'chngkaisiang@gmail.com'),
+(25, 'Bibiana', 'Lee Zi Ying', 7, '111', '222', 'uploads/3094_384893504898082_1563225657_n.jpg', 'Registered', 'p20012724@student.newinti.edu.my'),
+(19, 'Tan', 'Zhen Ying', 13, '21100555', '123', 'uploads/maica.jpg', 'Registered', 'zhenyingtan@gmail.com'),
+(107, 'Lee', 'Wei Shen', 13, '29001002', '1234', 'uploads/harry.jpg', 'Registered', 'weishenlee@gmail.com'),
+(15, 'Peter', 'Pang Kher Yong', 13, 'peter2312', '1234', 'uploads/Cat.jpg', 'Registered', ''),
+(71, 'Jason', 'Lee', 13, '21100556', 'noledel', 'uploads/noli.jpg', 'Registered', NULL),
+(231, 'Ong', 'Chun Chee', 17, '12', 'occ1234', '', 'Registered', NULL),
+(232, 'Ong', 'Yu Yong', 16, '134', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', NULL),
+(234, 'Ooos', 'wwee', 16, '1234', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_assignment`
+--
+
 CREATE TABLE `student_assignment` (
-  `student_assignment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_assignment_id` int(11) NOT NULL,
   `assignment_id` int(11) NOT NULL,
   `floc` varchar(100) NOT NULL,
   `assignment_fdatein` varchar(50) NOT NULL,
   `fdesc` varchar(100) NOT NULL,
   `fname` varchar(50) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `grade` varchar(5) NOT NULL,
-  PRIMARY KEY (`student_assignment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `grade` varchar(5) DEFAULT NULL,
+  `lecturer_class_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS student_backpack;
+--
+-- Dumping data for table `student_assignment`
+--
+
+INSERT INTO `student_assignment` (`student_assignment_id`, `assignment_id`, `floc`, `assignment_fdatein`, `fdesc`, `fname`, `student_id`, `grade`, `lecturer_class_id`) VALUES
+(8, 34, 'admin/uploads/1008_File_PETER PANG KHER YONG Internship letter.pdf', '2023-11-06 16:36:18', 'r', 'tr', 15, '60', NULL),
+(9, 34, 'admin/uploads/1208_File_PETER PANG KHER YONG Internship letter.pdf', '2023-11-06 16:38:39', 'f', 'd', 15, '90', NULL),
+(10, 33, 'admin/uploads/9364_File_PETER PANG KHER YONG Internship letter.pdf', '2023-11-06 19:07:31', 'd', 'a', 15, '76', NULL),
+(11, 35, 'admin/uploads/2519_File_PETER PANG KHER YONG Internship letter.pdf', '2023-11-06 20:10:50', 'R', 'e', 15, '65', NULL),
+(12, 34, 'admin/uploads/8430_File_PETER PANG KHER YONG Internship letter.pdf', '2023-11-09 04:07:19', 'r', 'e', 15, '85', NULL),
+(13, 35, 'admin/uploads/4031_File_PETER PANG KHER YONG Internship letter.pdf', '2023-11-09 04:07:57', 'r', 'e', 15, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_backpack`
+--
+
 CREATE TABLE `student_backpack` (
-  `file_id` int(11) NOT NULL AUTO_INCREMENT,
+  `file_id` int(11) NOT NULL,
   `floc` varchar(100) NOT NULL,
   `fdatein` varchar(100) NOT NULL,
   `fdesc` varchar(100) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `fname` varchar(100) NOT NULL,
-  PRIMARY KEY (`file_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `fname` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS student_class_quiz;
+--
+-- Dumping data for table `student_backpack`
+--
+
+INSERT INTO `student_backpack` (`file_id`, `floc`, `fdatein`, `fdesc`, `student_id`, `fname`) VALUES
+(1, '\'admin/uploads/2658_File_kevin.docx\'', '\'2014-02-13 11:11:50\'', '\'test\'', 210, '\'test\''),
+(2, '\'admin/uploads/5704_File_3 MISTAKES OF MY LIFE.pdf\'', '\'2015-12-18 21:47:54\'', '\'It is a novel by chetan bhagat\'', 225, '\'3 Mistakes Of my life\'');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_class_quiz`
+--
+
 CREATE TABLE `student_class_quiz` (
-  `student_class_quiz_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_class_quiz_id` int(11) NOT NULL,
   `class_quiz_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `student_quiz_time` varchar(100) NOT NULL,
-  `grade` varchar(100) NOT NULL,
-  PRIMARY KEY (`student_class_quiz_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `grade` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS subject;
+--
+-- Dumping data for table `student_class_quiz`
+--
+
+INSERT INTO `student_class_quiz` (`student_class_quiz_id`, `class_quiz_id`, `student_id`, `student_quiz_time`, `grade`) VALUES
+(1, 15, 107, '3600', '0 out of 2'),
+(2, 16, 136, '\'3600\'', '\'0 out of 0\''),
+(3, 17, 225, '\'3600\'', '\'1 out of 3\''),
+(4, 17, 224, '\'3599\'', '\'1 out of 3\''),
+(5, 18, 15, '3594', '1 out of 3'),
+(6, 19, 15, '3600', '0 out of 0'),
+(7, 19, 25, '3590', '0 out of 0'),
+(8, 18, 25, '3600', '1 out of 3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_performance`
+--
+
+CREATE TABLE `student_performance` (
+  `student_performance_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `assignment_grade` int(11) NOT NULL,
+  `quiz_score` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject`
+--
+
 CREATE TABLE `subject` (
-  `subject_id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject_id` int(11) NOT NULL,
   `subject_code` varchar(100) NOT NULL,
   `subject_title` varchar(100) NOT NULL,
   `category` varchar(100) NOT NULL,
   `description` longtext NOT NULL,
   `unit` int(11) NOT NULL,
   `Pre_req` varchar(100) NOT NULL,
-  `semester` varchar(100) NOT NULL,
-  PRIMARY KEY (`subject_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `semester` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS users;
+--
+-- Dumping data for table `subject`
+--
+
+INSERT INTO `subject` (`subject_id`, `subject_code`, `subject_title`, `category`, `description`, `unit`, `Pre_req`, `semester`) VALUES
+(14, '5001CEM', 'Advanced Algorithms', '', 'This subject comprises topics about systems development, SLC methodologies, Conceptual Framework, and FD and Flowchart analysis.', 3, '', '2023-2024'),
+(15, 'DCS1104', 'Database Management', '', 'This subject comprises topics about systems development, SLC methodologies, Conceptual Framework, and FD and Flowchart analysis.', 3, '', '2023-2024'),
+(16, 'BTCS503', 'Programming Languages', '', 'This subject comprises topics about systems development, SLC methodologies, Conceptual Framework, and FD and Flowchart analysis.', 3, '', '2023-2024'),
+(17, 'BTCS504', 'Design & Analysis of Algorithms', '', 'This subject comprises topics about systems development, SLC methodologies, Conceptual Framework, and FD and Flowchart analysis.', 3, '', '2023-2024'),
+(22, '5003CEM', 'Software Engineering', '', 'This subject comprises topics about systems development, SLC methodologies, Conceptual Framework, and FD and Flowchart analysis.', 3, '', '2nd'),
+(23, 'IS 222', 'Network and Internet Technology', '', 'This subject comprises topics about systems development, SLC methodologies, Conceptual Framework, and FD and Flowchart analysis.', 3, '', '2nd'),
+(24, 'BTCS505', 'Computer Graphics', '', 'This subject comprises topics about systems development, SLC methodologies, Conceptual Framework, and FD and Flowchart analysis.', 3, '', '2nd'),
+(25, 'BTCSE-303', 'Data Structures', '', 'This subject comprises topics about systems development, SLC methodologies, Conceptual Framework, and FD and Flowchart analysis.', 3, '', '2nd'),
+(32, 'BTCSE-302', 'Digital Circuits & Logic Design', '', 'This subject comprises topics about systems development, SLC methodologies, Conceptual Framework, and FD and Flowchart analysis.', 3, '', '2nd'),
+(36, 'IS 324', 'Web Technologies', '', 'This subject comprises topics about systems development, SLC methodologies, Conceptual Framework, and FD and Flowchart analysis.', 3, '', '2nd'),
+(37, 'BTCS506', 'Operating System', '', 'This subject comprises topics about systems development, SLC methodologies, Conceptual Framework, and FD and Flowchart analysis.', 3, '', '2nd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
 CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `firstname` varchar(100) NOT NULL,
-  `lastname` varchar(100) NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `lastname` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-DROP TABLE IF EXISTS user_log;
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `password`, `firstname`, `lastname`) VALUES
+(14, 'james', '1234', 'James', 'Pang Kher Jun'),
+(16, 'peterpang', '23122002', 'Peter', 'Pang Kher Yong');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_log`
+--
+
 CREATE TABLE `user_log` (
-  `user_log_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_log_id` int(11) NOT NULL,
   `username` varchar(25) NOT NULL,
   `login_date` varchar(30) NOT NULL,
   `logout_date` varchar(30) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`user_log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-INSERT INTO activity_log(activity_log_id,username,date,action) VALUES(1,'\'jkev\'','\'2013-11-18 15:25:33\'','\'Add Subject RIZAL\''),('2','\'jkev\'','\'2013-11-18 15:27:08\'','\'Edit Subject RIZAL\''),('3','\'\'','\'2013-11-18 15:30:46\'','\'Edit Subject IS 221\''),('4','\'\'','\'2013-11-18 15:31:12\'','\'Edit Subject IS 222\''),('5','\'\'','\'2013-11-18 15:31:24\'','\'Edit Subject IS 223\''),('6','\'\'','\'2013-11-18 15:31:34\'','\'Edit Subject IS 224\''),('7','\'\'','\'2013-11-18 15:31:54\'','\'Edit Subject IS 227\''),('8','\'\'','\'2013-11-18 15:32:37\'','\'Add Subject IS 411B\''),('9','\'\'','\'2013-11-18 15:34:54\'','\'Edit User jkev\''),('10','\'jkev\'','\'2014-01-17 13:26:18\'','\'Add User admin\''),('11','\'jkev\'','\'2015-12-16 13:11:44\'','\'Edit User navdeep300\''),('12','\'navdeep300\'','\'2015-12-16 13:12:10\'','\'Edit User gurisapra\''),('13','\'navdeep300\'','\'2015-12-16 14:36:13\'','\'Edit Subject BTCS501\''),('14','\'navdeep300\'','\'2015-12-16 14:37:26\'','\'Edit Subject BTCS502\''),('15','\'navdeep300\'','\'2015-12-16 14:37:52\'','\'Edit Subject BTCS503\''),('16','\'navdeep300\'','\'2015-12-16 14:39:49\'','\'Edit Subject BTCS504\''),('17','\'navdeep300\'','\'2015-12-16 14:41:37\'','\'Edit Subject IS 221\''),('18','\'navdeep300\'','\'2015-12-16 14:44:13\'','\'Edit Subject IS 222\''),('19','\'navdeep300\'','\'2015-12-16 14:46:04\'','\'Edit Subject BTCS505\''),('20','\'navdeep300\'','\'2015-12-16 14:48:09\'','\'Edit Subject BTCSE-303\''),('21','\'navdeep300\'','\'2015-12-16 14:49:39\'','\'Edit Subject BTCSE-302\''),('22','\'navdeep300\'','\'2015-12-16 14:51:24\'','\'Edit Subject IS 324\''),('23','\'navdeep300\'','\'2015-12-16 14:53:01\'','\'Edit Subject BTCS506\''),('24','\'navdeep300\'','\'2015-12-16 17:01:18\'','\'Add School Year 2015-2016\''),('25','\'navdeep300\'','\'2023-11-01 14:29:14\'','\'Add User peterpang\'');
+--
+-- Dumping data for table `user_log`
+--
 
-INSERT INTO answer(answer_id,quiz_question_id,answer_text,choices) VALUES('81','32','\'john\'','\'A\''),('82','32','\'smith\'','\'B\''),('83','32','\'kevin\'','\'C\''),('84','32','\'lorayna\'','\'D\''),('85','34','\'Peso\'','\'A\''),('86','34','\'PHP Hypertext\'','\'B\''),('87','34','\'PHP Hypertext Preprosesor\'','\'C\''),('88','34','\'Philippines\'','\'D\''),('89','37','\'Preprocessor Hypertext\'','\'A\''),('90','37','\'Pull He Paps\'','\'B\''),('91','37','\'Pure Hyper Language\'','\'C\''),('92','37','\'None of the above\'','\'D\''),('93','39','\'\'','\'A\''),('94','39','\'\'','\'B\''),('95','39','\'\'','\'C\''),('96','39','\'\'','\'D\'');
+INSERT INTO `user_log` (`user_log_id`, `username`, `login_date`, `logout_date`, `user_id`) VALUES
+(86, 'peterpang', '2023-11-02 03:09:53', '2023-11-15 00:24:42', 16),
+(87, 'james', '2023-11-02 03:10:23', '', 14),
+(88, 'peterpang', '2023-11-02 03:23:58', '2023-11-15 00:24:42', 16),
+(89, 'peterpang', '2023-11-02 04:26:04', '2023-11-15 00:24:42', 16),
+(90, 'peterpang', '2023-11-02 15:01:39', '2023-11-15 00:24:42', 16),
+(91, 'peterpang', '2023-11-02 15:03:03', '2023-11-15 00:24:42', 16),
+(92, 'peterpang', '2023-11-04 04:45:19', '2023-11-15 00:24:42', 16),
+(93, 'peterpang', '2023-11-05 18:11:43', '2023-11-15 00:24:42', 16),
+(94, 'peterpang', '2023-11-06 22:14:31', '2023-11-15 00:24:42', 16),
+(95, 'peterpang', '2023-11-07 17:38:17', '2023-11-15 00:24:42', 16),
+(96, 'peterpang', '2023-11-07 23:29:08', '2023-11-15 00:24:42', 16),
+(97, 'peterpang', '2023-11-08 21:30:42', '2023-11-15 00:24:42', 16),
+(98, 'peterpang', '2023-11-09 02:02:09', '2023-11-15 00:24:42', 16),
+(99, 'peterpang', '2023-11-09 07:49:06', '2023-11-15 00:24:42', 16),
+(100, 'peterpang', '2023-11-09 08:11:23', '2023-11-15 00:24:42', 16),
+(101, 'peterpang', '2023-11-15 00:09:11', '2023-11-15 00:24:42', 16);
 
+--
+-- Indexes for dumped tables
+--
 
-INSERT INTO class(class_id,class_name) VALUES('7','\'ME A1\''),('8','\'ME A2\''),('12','\'CE A1\''),('13','\'CE A2\''),('14','\'CE E1\''),('15','\'CE E2\''),('16','\'IT A1\''),('17','\'IT A2\''),('18','\'IT B1\''),('19','\'IT B2\''),('20','\'CSE A1\''),('21','\'CSE A2\''),('22','\'CSE B1\''),('23','\'CSE B2\'');
+--
+-- Indexes for table `activity_log`
+--
+ALTER TABLE `activity_log`
+  ADD PRIMARY KEY (`activity_log_id`);
 
-INSERT INTO class_quiz(class_quiz_id,lecturer_class_id,quiz_time,quiz_id) VALUES('13','167','3600','3'),('14','167','3600','3'),('15','167','1800','3'),('16','185','900','0'),('17','197','300','6');
+--
+-- Indexes for table `answer`
+--
+ALTER TABLE `answer`
+  ADD PRIMARY KEY (`answer_id`);
 
-INSERT INTO class_subject_overview(class_subject_overview_id,lecturer_class_id,content) VALUES('1','167','\'<p>Chapter&nbsp; 1</p>\\r\\n\\r\\n<p>Cha</p>\\r\\n\''),('2','197','\'<p>Computer Graphics subject will teach students about how the graphics is formed on a screen. We will learn various rendering techniques and much more.</p>\\r\\n\''),('4','192','\'<p>This subject is excellent</p>\\r\\n\'');
+--
+-- Indexes for table `assignment`
+--
+ALTER TABLE `assignment`
+  ADD PRIMARY KEY (`assignment_id`);
 
+--
+-- Indexes for table `class`
+--
+ALTER TABLE `class`
+  ADD PRIMARY KEY (`class_id`);
 
-INSERT INTO content(content_id,title,content) VALUES('1','\Mission\','X\'3c7072653e0d0a3c7370616e207374796c653d22666f6e742d73697a653a31367078223e3c7374726f6e673e4d697373696f6e3c2f7374726f6e673e3c2f7370616e3e3c2f7072653e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a6c656674223e3c7370616e207374796c653d22666f6e742d66616d696c793a617269616c2c68656c7665746963612c73616e732d73657269663b20666f6e742d73697a653a6d656469756d223e3c7370616e207374796c653d22666f6e742d73697a653a6c61726765223e266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b3c2f7370616e3e3c2f7370616e3e266e6273703b20266e6273703b3c7370616e207374796c653d22666f6e742d73697a653a31387078223e20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b3c2f7370616e3e3c2f703e0d0a0d0a3c64697620636c6173733d22636f6e74656e74223e0d0a3c756c3e0d0a093c6c693e3c7370616e207374796c653d22666f6e742d73697a653a31367078223e55706c6966746d656e74206f6620527572616c2053747564656e7473207468726f75676820746563686e6963616c20656475636174696f6e2e3c2f7370616e3e3c2f6c693e0d0a093c6c693e3c7370616e207374796c653d22666f6e742d73697a653a31367078223e526573706f6e6420746f206c6f63616c20736f63696574616c206e6565647320627920646576656c6f70696e672073656c656374656420262333393b74617267657465642072657365617263682070726f6a65637473262333393b2e3c2f7370616e3e3c2f6c693e0d0a093c6c693e3c7370616e207374796c653d22666f6e742d73697a653a31367078223e5175616c69747920747261696e696e672070726f6772616d7320696e206e656564206261736564206d6f6465726e20746563686e6f6c6f67792e3c2f7370616e3e3c2f6c693e0d0a093c6c693e3c7370616e207374796c653d22666f6e742d73697a653a31367078223e546f206d61696e7461696e2073746174652d6f662d7468652d61727420696e66726173747275637475726520696e206c61626f7261746f726965732e3c2f7370616e3e3c2f6c693e0d0a093c6c693e3c7370616e207374796c653d22666f6e742d73697a653a31367078223e546f2070726f6d6f74652063756c74757265206f662073656c662d656d706c6f796d656e742e3c2f7370616e3e3c2f6c693e0d0a093c6c693e3c7370616e207374796c653d22666f6e742d73697a653a31367078223e546f20696d70617274206e6f6e2d666f726d616c20656475636174696f6e20746f20756e656d706c6f79656420796f7574682e3c2f7370616e3e3c2f6c693e0d0a093c6c693e3c7370616e207374796c653d22666f6e742d73697a653a31367078223e546f20696e63756c63617465206d6f72616c2c206574686963616c2c2073706972697475616c2076616c75657320696e20656475636174696f6e20617420616c6c206c6576656c732e3c2f7370616e3e3c2f6c693e0d0a3c2f756c3e0d0a3c2f6469763e0d0a\''),('2','\'Vision\'','X\'3c7072653e0d0a3c7370616e207374796c653d22666f6e742d73697a653a6c61726765223e3c7374726f6e673e566973696f6e3c2f7374726f6e673e3c2f7370616e3e3c2f7072653e0d0a0d0a3c703e266e6273703b3c2f703e0d0a0d0a3c703e266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b3c7370616e207374796c653d22666f6e742d73697a653a6c61726765223e266e6273703b3c7370616e207374796c653d22666f6e742d73697a653a31367078223e203c2f7370616e3e3c2f7370616e3e3c7370616e207374796c653d22666f6e742d73697a653a31367078223e5265616c697a6174696f6e206f6620476c696d70736573206f66206120476f6c64656e20496e64696120696e20746865207265616c28727572616c2920496e646961207768696368206c6976657320616e642061626f756e647320696e206974732076696c6c616765732e20474e4445432077696c6c20657863656c206e6174696f6e616c6c7920616e642064697374696e677569736820697473656c662061732061207265636f676e697a6564207072652d656d696e656e74206c656164657220746f2073657276652074686973203730252042726f74686572686f6f64207468726f7567682069747320736f63696f65636f6e6f6d69632075706c6966746d656e74206279206578706f73757265206f662074686520686176656e6f747320746f20456e67672e2026616d703b20546563686e6f6c6f677920746865726562792067726f6f6d696e67207468656d20617320746563686e6963616c6c7920636f6d706574656e7420616e6420696e74656c6c65637475616c6c792d766974616c20477261647561746573207468726f7567682070726163746963616c6c7920666f6375736564207175616c697479206c6561726e696e6720657870657269656e6365732c20616e642074687573206173737572696e672070726f64756374697665204361726565727320666f72207468656d2e3c2f7370616e3e3c2f703e0d0a0d0a3c703e266e6273703b3c2f703e0d0a\''),('3','\'History\'','X\'3c7072653e0d0a3c7370616e207374796c653d22666f6e742d73697a653a6c61726765223e484953544f525920266e6273703b3c2f7370616e3e203c2f7072653e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a6a757374696679223e266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b266e6273703b3c2f703e0d0a0d0a3c64697620636c6173733d22636f6e74656e74223e0d0a3c70207374796c653d22746578742d616c69676e3a6a757374696679223e47757275204e616e616b2044657620456e67696e656572696e6720436f6c6c6567652c206f6e65206f66207468652070726573746967696f75732c206f6c6465737420616e64206d696e6f7269747920696e737469747574696f6e206f66204e6f72746865726e20496e6469612c207761732065737461626c697368656420756e64657220746865206165676973206f66204e616e6b616e6120536168696220456475636174696f6e20547275737420284e5345542920696e20313935362e204e5345542077617320666f756e64656420696e206d656d6f7279206f6620746865206d6f7374207361637265642074656d706c65206f66204e616e6b616e612053616869622c20626972746820706c616365206f662047757275204e616e616b20446576204a692e20536869726f6d616e69204775727564776172612050726162616e6468616b20436f6d6d69747465652c20416d7269747361722c2061207072656d696572206f7267616e697a6174696f6e206f6620756e6976657273616c2062726f74686572686f6f642c20776869636820697320746865206d61696e20666f72636520626568696e6420746865206d697373696f6e206f66202671756f743b52656d6f76616c206f662045636f6e6f6d6963204261636b776172646e657373207468726f75676820546563686e6f6c6f67792671756f743b20616e64204e5345542077697468207468652073616d65206d697373696f6e2c2065737461626c6973686564206120506f6c79746563686e696320696e203139353320616e642047757275204e616e616b2044657620456e67696e656572696e6720436f6c6c6567652028474e4445432920696e20313935362e205468652054727573742064656564207761732072656769737465726564206f6e203234746820466562727561727920313935332077697468206120636f6d6d69746d656e74206279204e616e6b616e6120536168696220456475636174696f6e20547275737420746f2075706c696674207468652076617374207765616b65722073656374696f6e206f6620496e6469616e20706f6c69747920636f6d70726973696e6720527572616c20496e6469612062792061646d697474696e67203730252073747564656e747320657665727920796561722066726f6d20527572616c2041726561732e205468697320636f6d6d69746d656e7420776173206d61646520746f20746865206e6174696f6e206f6e2038746820417072696c2c20313935362e2054686520646179207768656e20666f756e646174696f6e2073746f6e65206f662074686520436f6c6c65676520776173206c616964206279204c6174652044722e2052616a656e64726120507261736164204a692c2074686520466972737420507265736964656e74206f6620496e6469612e3c6272202f3e0d0a54686520436f6c6c6567652077617320616666696c696174656420776974682050756e6a616220556e69766572736974792c204368616e6469676172682073696e63652069747320696e63657074696f6e2e204f6e2065737461626c6973686d656e74206f662050756e6a616220546563686e6963616c20556e69766572736974792c204a616c616e646861722c2073696e636520313939372074686520636f6c6c65676520697320616666696c696174656420776974682069742c207768696368206973206e6f77206b6e6f776e20617320492e4b2e47756a72616c2050756e6a616220546563686e6963616c20556e69766572736974792028494b47505455292e2054686520436f6c6c65676520636f75727365732061726520617070726f76656420627920416c6c20496e64696120436f756e63696c20666f7220546563686e6963616c20456475636174696f6e2c204e65772044656c68692e20546869732069732074686520666972737420456e67696e656572696e6720436f6c6c656765206f662050756e6a61622c2077686963682077617320636f6e666572726564204175746f6e6f6d6f75732053746174757320627920556e6976657273697479204772616e747320436f6d6d697373696f6e28554743292c204e65772044656c686920696e203230313220756e6465722073656374696f6e203228662920616e64203132284229206f66205547432041637420313935362e2054686520436f6c6c65676520756e646572677261647561746520636f75727365732061726520616363726564697465642077697468204e6174696f6e616c20426f617264206f662041636372656469746174696f6e2c204e65772044656c68692073696e636520323030342c206e6f77207468652073616d6520617265206163637265646974656420756e64657220546965722d49202857617368696e67746f6e204163636f7264292e2054686520636f6c6c6567652069732061636372656469746564207769746820266c7371756f3b4126726471756f3b204772616465206279204e4141432c205547432e205461746120436f6e73756c74616e6379205365727669636573202854435329206861732061636372656469746564207468697320636f6c6c65676520747769636520666f7220706c6163656d656e7420707572706f73652e2054686520636f6c6c65676520697320616c736f2049534f20393030312d32303038204365727469666965642e3c6272202f3e0d0a4d4852442c20476f76742e206f6620496e646961206861732073616e6374696f6e65642052732e2031302043726f72657320666f7220546563686e6963616c20456475636174696f6e205175616c69747920496d70726f76656d656e742050726f6772616d6d652d4949202854455149502d49492920746f207468697320436f6c6c65676520616e6420746865204465706172746d656e74206f6620536369656e636520616e6420546563686e6f6c6f677920284453542920616c736f2073616e6374696f6e65642052732e20312043726f72657320756e64657220464953542050726f6772616d6d6520666f72206361727279696e67206f75742074686520726573656172636820616374697669746965732e2054686520436f6c6c65676520686173207265636569766564206772616e7420746f207468652074756e65206f662052732e20352043726f72657320666f722072657365617263682026616d703b206f74686572206163746976697469657320627920646966666572656e74206167656e63696573206c696b652041494354452c2055474320616e6420445354206574632e3c2f703e0d0a0d0a3c703e464d20526164696f2053746174696f6e20686173206265656e2065737461626c69736865642061667465722073616e6374696f6e20627920476f76742e206f6620496e64696120666f7220656475636174696e67207468652067656e6572616c207075626c69632e3c2f703e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a6a757374696679223e474e444543206973206f766572616c6c2073706f727473206368616d70696f6e206f662050756e6a616220546563686e6963616c20556e697665727369747920284e6f772c20494b47505455292026616d703b20616c736f20696e2069747320737572766579206465636c6172656420474e444543204265737420456e67696e656572696e6720636f6c6c65676520696e2079656172203230313120616e6420323031322026616d703b203230313420666f7220657863656c6c656e7420706c6163656d656e747320616d6f6e67737420616c6c2069747320616666696c696174656420636f6c6c656765732e205468657265206973206f6e65204e2e432e432e20436f6d70616e7920696e2074686520696e737469747574696f6e206174746163686564207769746820332050622e2c20426e204e2e432e432e2028426f7920436164657473203d2037392c204769726c204361646574203d2032372c20746f74616c206f6620313036204361646574732e20546872656520616e6420612068616c6620756e697473206f66204e2e532e532e20686176696e67206120746f74616c206f662033353020766f6c756e74656572732068617665206265656e20616c6c6f7474656420627920494b4750545520746f2070726f76696465206f70706f7274756e697469657320746f207468652073747564656e747320666f7220536f6369616c20536572766963657320696e20766172696f7573206669656c6473206c696b6520626c6f6f6420646f6e6174696f6e2c20706c616e746174696f6e2c20636c65616e6c696e657373206574632e20486f7765766572206120746f74616c206f66206d6f7265207468616e203130303020766f6c756e74656572732061726520656e726f6c6c656420696e204e535320696e2074686520436f6c6c65676520656163682061636164656d696320796561722e3c2f703e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a6a757374696679223e54686520436f6c6c65676520686173206265656e2072616e6b656420636f6e73697374656e746c792077697468696e20666972737420353020656e67696e656572696e6720636f6c6c65676573206f662074686520636f756e74727920776869636820696e636c75646573204949547320616e64204e49547320627920646966666572656e7420696e646570656e64656e74206e6174696f6e616c206167656e63696573206c696b6520496e64696120546f6461792c204f75746c6f6f6b2c204353522c2053746172205456206574632e2073696e636520323030362e3c2f703e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a6a757374696679223e474e44454320686173207369676e656420766172696f7573204d6f557320666f722065786368616e6765206f662073747564656e747320616e6420666163756c7479207769746820496e7465726e6174696f6e616c20556e697665727369746965732e3c6272202f3e0d0a474e4445432072756e7320736576656e20456e67696e656572696e67204272616e6368657328436976696c20456e67672e2c204d6563682e20456e67672c20456c6563742e456e67672e2c20456c656374726f6e6963732026616d703b20436f6d6d2e20456e67672e20436f6d70757465722053632e2026616d703b20456e67672c2c20496e666f726d6174696f6e20546563686e6f6c6f67792c2050726f64756374696f6e20456e67672e29206174205547206c6576656c20616e64203135205047206c6576656c20636f757273657320696e636c7564696e67204d42412c204d43412e2054686520636f6c6c656765206861732050682e4420696e20616c6c20456e67696e656572696e67204272616e6368657320616e642069742069732061205149502043656e74726520756e64657220414943544520666f722050682e4420696e2073747265616d732076697a2e20436976696c20456e67672e2c204d6563682e20456e67672e20456c656374726963616c20456e67696e656572696e672e3c2f703e0d0a0d0a3c703e4e6561726c792032352c3030302047726164756174657320616e64203735303020506f737420477261647561746573206861766520706173736564206f75742066726f6d207468697320636f6c6c65676520616e64206172652061742070726573656e74207375636365737366756c6c7920656d706c6f796564206f6e20686967682070726f66696c65206a6f627320696e20496e6469612026616d703b206162726f6164206d616b696e6720746865697220616c6d61206d617465722070726f7564206f66207468656d2e3c2f703e0d0a3c2f6469763e0d0a\''),('4','\'Footer\'','X\'3c70207374796c653d22746578742d616c69676e3a63656e746572223e474e444543204f6e6c696e65204c6561726e696e67204d616e6167656e6d656e742053797374656d3c2f703e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a63656e746572223e416c6c2052696768747320526573657276656420267265673b323031353c2f703e0d0a\''),('5','\'Upcoming Events\'','X\'3c7072653e0d0a555020434f4d494e47204556454e54533c2f7072653e0d0a0d0a3c703e3c7374726f6e673e2667743b3c2f7374726f6e673e204558414d3c2f703e0d0a0d0a3c703e3c7374726f6e673e2667743b3c2f7374726f6e673e20494e54455243414d505553204d4545543c2f703e0d0a0d0a3c703e3c7374726f6e673e2667743b3c2f7374726f6e673e20424547494e4e494e47204f46204e45572053455353494f4e3c2f703e0d0a0d0a3c703e3c7374726f6e673e2667743b3c2f7374726f6e673e204154484c45544943204d4545543c2f703e0d0a0d0a3c703e266e6273703b3c2f703e0d0a\''),('6','\'Title\'','X\'3c703e3c7370616e207374796c653d22666f6e742d66616d696c793a747265627563686574206d732c67656e657661223e474e444543204f6e6c696e65204c6561726e696e67204d616e6167656d656e742053797374656d3c2f7370616e3e3c2f703e0d0a\''),('7','\'News\'','X\'3c7072653e0d0a3c7370616e207374796c653d22666f6e742d73697a653a6d656469756d223e3c656d3e3c7374726f6e673e526563656e74204e6577730d0a3c2f7374726f6e673e3c2f656d3e3c2f7370616e3e3c2f7072653e0d0a0d0a3c68323e3c7374726f6e673e3c7370616e207374796c653d22666f6e742d73697a653a31347078223e5175616c69747920496e69746961746976657320696e20546563686e6963616c20456475636174696f6e616c20496e737469747574696f6e732671756f743b3c6272202f3e0d0a284f7574636f6d6520626173656420456475636174696f6e20616e642041636372656469746174696f6e29203c2f7370616e3e3c2f7374726f6e673e3c2f68323e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a6a757374696679223e5175616c6974792069732065766572796f6e6526727371756f3b7320707265726f67617469766520616e642065766572796f6e6526727371756f3b7320726573706f6e736962696c6974792e2054686520746563686e6963616c20656475636174696f6e2073797374656d20696e20496e646961206973206265656e207375626a656374656420746f207261646963616c20616e64207265766f6c7574696f6e617279206368616e67657320616e6420697320746865207369676e69666963616e6365206f66207175616c69747920696e69746961746976657320616e64206973206e6f74206f626c6976696f757320746f206974732062656e65666974732072656170656420746865206d616e75666163747572696e6720736563746f722e205468652067726f77746820616e6420636f6d7065746974696f6e20616d6f6e672073656c662d66696e616e63696e6720696e737469747574657320616e64206576657220696e6372656173696e672061776172656e657373206f66207374616b65686f6c64657273206861732070726573737572697a65642074686520746563686e6963616c20656475636174696f6e616c2073797374656d20746f2073686966742069747320666f6375732066726f6d207175616e746974617469766520657870616e73696f6e20746f207175616c6974617469766520657870616e73696f6e2e20546f74616c207175616c697479206d616e6167656d656e7420696e20746563686e6963616c20656475636174696f6e20707265766965777320746865207175616c697479206f6620696e7075747320696e2074686520666f726d206f662073747564656e74732c20666163756c74792c207465616368696e67206c6561726e696e672070726f6365737320616e6420696e6672617374727563747572653b20616e6420746865207175616c697479206f66206f75747075747320696e2074686520666f726d206f66207468652076616c75652061646465642073747564656e74732077697468206120686f7374206f6620696e64696361746f727320617373657373696e67207175616c6974792e2054686520647269766520666f72204e42412026616d703b204e4141432061636372656469746174696f6e2073796d626f6c697a65732067726f77696e6720696e74657265737420696e206170706c79696e67207175616c69747920696e69746961746976657320696e20746563686e6963616c20696e73746974757465732e2054686520666f637573206973206e6f77207368696674696e672066726f6d206f75747075742062617365642073797374656d20746f206f7574636f6d652062617365642e2054686520696d706c656d656e746174696f6e20616e64206173736573736d656e74206f66207175616c69747920696e20656475636174696f6e20676f65732061206c6f6e672077617920696e20636f6e74696e756f757320696d70726f76656d656e74206f6620746865206f7267616e697a6174696f6e20616e6420736174697366616374696f6e206f6620746865207374616b65686f6c646572732e2057697468207468652061626f76652069737375657320696e20666f6375732c2047757275204e616e616b2044657620456e67696e656572696e6720436f6c6c6567652c204c75646869616e612068617320706c616e6e656420612074687265652064617920776f726b73686f70206f6e203c7374726f6e673e266c6471756f3b5175616c69747920496e69746961746976657320696e20546563686e6963616c20456475636174696f6e616c20496e737469747574696f6e7326726471756f3b3c2f7374726f6e673e2e3c6272202f3e0d0a3c6272202f3e0d0a3c7374726f6e673e50726f6772616d6d652056656e75652c20446174657320616e642054696d696e67733c2f7374726f6e673e3c6272202f3e0d0a56656e75653a20436f6e73756c74616e63792043656c6c206f662074686520436f6c6c6567653c6272202f3e0d0a44617465733a20323420266e646173683b20323620446563656d6265722c20323031353c6272202f3e0d0a54696d696e67733a203920414d20746f203520504d207769746820627265616b7320696e206265747765656e20666f722074656120616e64206c756e63682e3c2f703e0d0a\''),('8','\'Announcements\'','X\'3c7072653e0d0a3c7370616e207374796c653d22666f6e742d73697a653a6d656469756d223e3c656d3e3c7374726f6e673e416e6e6f756e63656d656e74733c2f7374726f6e673e3c2f656d3e3c2f7370616e3e3c2f7072653e0d0a0d0a3c703e4578616d696e6174696f6e20506572696f643a20446563656d62657220322d32322c20323031353c2f703e0d0a0d0a3c703e53656d6573747269616c20427265616b3a20446563656d6265722032392d204a616e756172792031302c20323031353c2f703e0d0a\''),('10','\'Calendar\'','X\'3c707265207374796c653d22746578742d616c69676e3a63656e746572223e0d0a3c7370616e207374796c653d22666f6e742d73697a653a6d656469756d223e3c7374726f6e673e266e6273703b43414c454e444152204f46204556454e543c2f7374726f6e673e3c2f7370616e3e3c2f7072653e0d0a0d0a3c7461626c6520616c69676e3d2263656e746572222063656c6c70616464696e673d2230222063656c6c73706163696e673d223022207374796c653d226c696e652d6865696768743a312e36656d3b206d617267696e2d6c6566743a6175746f3b206d617267696e2d72696768743a6175746f223e0d0a093c74626f64793e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e46697273742053656d657374657220266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b3c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e4175677573742031302c203230323320746f20446563656d6265722031312c20323032333c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e53656d65737472616c20427265616b3c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e446563656d6265722032392c203230323320746f204a616e756172792031302c20323032343c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e5365636f6e642053656d65737465723c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e4a616e756172792031302c203230323420746f204d61792032372c20323032343c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e53656d657374657220427265616b3c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e4a756e652032372c203230323420746f204a756c792032382c20323032343c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a093c2f74626f64793e0d0a3c2f7461626c653e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a63656e746572223e266e6273703b3c2f703e0d0a0d0a3c7461626c652063656c6c70616464696e673d2230222063656c6c73706163696e673d223022207374796c653d226865696768743a38383070783b206c696e652d6865696768743a312e36656d3b206d617267696e2d6c6566743a6175746f3b206d617267696e2d72696768743a6175746f3b2077696474683a3537307078223e0d0a093c74626f64793e0d0a09093c74723e0d0a0909093c746420636f6c7370616e3d2234223e0d0a0909093c703e4175677573742031302c203230323420746f20446563656d6265722031312c20323032353c7374726f6e673e20266e646173683b2046697273742053656d657374657220415920323032332d323032343c2f7374726f6e673e3c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4175677573742031302c203230323320266e6273703b20266e6273703b20266e6273703b266e6273703b3c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e266e6273703b4f7269656e746174696f6e20776974682074686520506172656e7473206f662074686520436f6c6c656765266e6273703b46726573686d656e3c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4175677573742031313c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e466972737420446179206f6620536572766963653c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4175677573742031353c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e436f6c6c65676520506572736f6e6e656c2047656e6572616c20417373656d626c793c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4175677573742031363c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e496e2d5365727669636520547261696e696e6720284465706172746d656e74616c293c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4175677573742031323c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e466972737420446179206f6620436c61737365733c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4175677573742031373c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e4f7269656e746174696f6e20776974682053747564656e747320627920436f6c6c6567652f43616d7075732f4465706172746d656e743c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4175677573742031392c32302c32313c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e4272616e63682f43616d70757320566973697420666f722041646d696e697374726174697665202f2041636164656d69632f41636372656469746174696f6e2f20436f6e6365726e733c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c746420726f777370616e3d2232223e0d0a0909093c703e53657074656d6265723c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e436c7562204f7267616e697a6174696f6e7320284279204469736369706c696e652f50726f6772616d73293c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e53747564656e7420416666696c696174696f6e2f496e64756374696f6e2050726f6772616d733c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e53657074656d6265722031312c2031323c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e46697273742053657373696f6e616c733c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4f63746f62657220382d2031323c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e5365636f6e642053657373696f6e616c733c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4e6f76656d6265722031302d31353c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e5375626d697373696f6e206f662047726164652053686565747320666f72204d69647465726d3c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4e6f76656d6265723c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e5265636f676e6974696f6e2050726f6772616d20284465616e26727371756f3b73204c697374293c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4e6f76656d6265722031363c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e436f6c6c656765205465636820466573743c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4e6f76656d6265722031382d32313c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e54686972642053657373696f6e616c733c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e446563656d6265723c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e46696e616c204578616d696e6174696f6e3c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e446563656d6265722032393c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e53656d65737472616c20427265616b3c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a093c2f74626f64793e0d0a3c2f7461626c653e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a63656e746572223e266e6273703b3c2f703e0d0a0d0a3c7461626c652063656c6c70616464696e673d2230222063656c6c73706163696e673d223022207374796c653d226865696768743a35383670783b206d617267696e2d6c6566743a6175746f3b206d617267696e2d72696768743a6175746f3b2077696474683a3535337078223e0d0a093c74626f64793e0d0a09093c74723e0d0a0909093c746420636f6c7370616e3d2234223e0d0a0909093c703e3c7374726f6e673e4a616e2e2031302c203230323420746f204d61792032372c203230323420266e646173683b205365636f6e642053656d657374657220415920323032332d323032343c2f7374726f6e673e3c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4a616e75617279203130266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b20266e6273703b266e6273703b3c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e5374617274206f6620436c61737365733c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4a616e756172792031392c2032302c2032312c2032323c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e496e74657263616d7075732053706f72747320616e642043756c747572616c20466573742f436f6c6c656765205765656b3c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4a616e756172792032352d32383c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e4c6f6e672054657374733c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e466562727561727920352c363c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e53706f727473204d6565743c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e46656272756172792031352d31393c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e5365636f6e642053657373696f6e616c733c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e46656272756172792032393c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e5375626d697373696f6e206f66204772616465732053686565747320666f72204d69647465726d3c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4d617263682031362d32303c2f703e0d0a0909093c2f74643e0d0a0909093c74643e54686972642053657373696f6e616c733c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4d617263682032302d33303c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e507265706172696e6720486f6c69646179733c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e417072696c3c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e456e642053656d6573746572204578616d733c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4d61792031323c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e4465636c61726174696f6e206f6620726573756c743c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a09093c74723e0d0a0909093c74643e0d0a0909093c703e4a756e652d4175677573743c2f703e0d0a0909093c2f74643e0d0a0909093c74643e0d0a0909093c703e53656d657374657220427265616b3c2f703e0d0a0909093c2f74643e0d0a09093c2f74723e0d0a093c2f74626f64793e0d0a3c2f7461626c653e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a63656e746572223e266e6273703b3c2f703e0d0a\''),('11','\'Directories\'','X\'3c64697620636c6173733d226a736e2d61727469636c652d636f6e74656e7422207374796c653d22746578742d616c69676e3a206c6566743b223e0d0a3c7072653e0d0a3c7370616e207374796c653d22666f6e742d73697a653a6d656469756d223e3c656d3e3c7374726f6e673e4449524543544f524945533c2f7374726f6e673e3c2f656d3e3c2f7370616e3e3c2f7072653e0d0a0d0a3c756c3e0d0a093c6c693e4469726563746f72266e6273703b2d2039393134342d32353032353c2f6c693e0d0a093c6c693e504120746f204469726563746f72202d2039383535342d30303434383c2f6c693e0d0a093c6c693e4465616e202841646d696e2e29202d2039383134382d30313731383c2f6c693e0d0a093c6c693e436c65726b202d2038323833382d31353131343c2f6c693e0d0a093c6c693e417474656e64616e74202d2039343137302d34383631353c2f6c693e0d0a093c6c693e43617368696572202d20393032333032303330313c2f6c693e0d0a093c6c693e44454f202d20393738313037303530383c2f6c693e0d0a093c6c693e537570706c79202d203439352d333736373c2f6c693e0d0a093c6c693e496e7465726e6574204c6162202d203731322d363134342f3731322d363435393c2f6c693e0d0a093c6c693e4f66666963657220496e636861726765266e6273703b2d2039383738362d33343234353c2f6c693e0d0a093c6c693e477561726420486f757365202d393420343736313630303c2f6c693e0d0a093c6c693e48524d202d20393434343935343939363c2f6c693e0d0a093c6c693e457874656e73696f6e202d203435372d323831393c2f6c693e0d0a093c6c693e43616e7465656e202d203439352d353339363c2f6c693e0d0a093c6c693e4c696272617279202d203439352d353134333c2f6c693e0d0a3c2f756c3e0d0a3c2f6469763e0d0a\''),('12','\'president\'','X\'3c68323e44722e4d616e6f6861722053696e6768205361696e693c2f68323e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a6a757374696679223e3c696d6720616c743d2222207372633d22696d616765732f707265736964656e742e6a706722207374796c653d226865696768743a31393770783b2077696474683a313432707822202f3e47757275204e616e616b2044657620456e67696e656572696e6720436f6c6c6567652c204c75646869616e612028616e206175746f6e6f6d6f757320636f6c6c65676520756e6465722055474320416374292c2065737461626c697368656420696e20313935362c207761732073657420757020756e64657220746865206165676973206f66204e616e6b616e6120536168696220456475636174696f6e2054727573742c206465766f74656420746f20746865206361757365206f6620727572616c20656475636174696f6e20746f206d656574207468652067726f77696e672064656d616e6420666f7220746563686e6963616c20616e642070726f66657373696f6e616c206d616e706f77657220616e6420696e64757374726965732e205765206172652070726f75642074686174207468697320696e737469747574696f6e2068617320636f6e73697374656e746c79206d61696e7461696e65642069747320747261646974696f6e206f6620657863656c6c656e636520696e20746865206669656c64206f6620746563686e6963616c20656475636174696f6e2074696c6c20646174652e2054686520636f6c6c65676520686173206265656e206465636c6172656420616e203c7374726f6e673e6175746f6e6f6d6f757320636f6c6c6567653c2f7374726f6e673e206279205547432c204e65772044656c6869206f6e2031372e382e323031322e2054686520636f6c6c656765206861732070726976696c656765206f66207374617274696e67203c7374726f6e673e50682e442064656772656520756e646572205175616c69747920496d70726f76656d656e742050726f6772616d6d652028514950293c2f7374726f6e673e2062792041494354452c204e65772044656c68692e2054686520636f6c6c65676520686173206265656e2061636372656469746564203c7374726f6e673e7769746820266c7371756f3b4126727371756f3b204772616465206279204e4141433c2f7374726f6e673e2e2054686520636f6c6c656765206861732061747461696e6564203c7374726f6e673e49534f20393030313a323030382043657274696669636174696f6e3c2f7374726f6e673e20616e64207468652055472070726f6772616d6d6573206172652061636372656469746564206279203c7374726f6e673e4e42413c2f7374726f6e673e20756e64657220746865204e6577204f7574636f6d652042617365642053797374656d20756e6465722057617368696e67746f6e204163636f72642e20526563656e746c792c2074686520496e73746974757465207761732072616e6b6564203c7374726f6e673e4265737420456e67696e656572696e6720436f6c6c65676520417761726420696e2050756e6a616220537461746520284353522d4748524443292026616d703b203337746820706f736974696f6e20756e646572207468652063617465676f7279206f6620546f7020373520456e67696e656572696e6720436f6c6c656765206f66204e6174696f6e20616e6420466972737420616d6f6e6720456e67696e656572696e6720436f6c6c65676573206f662050756e6a61623c2f7374726f6e673e20284d6167617a696e65204f75746c6f6f6b292e2041706172742066726f6d206f66666572696e6720766172696f75732041636372656469746564206772616475617465206c6576656c20422e5465636820636f7572736573207669732d612d76697320436976696c20456e67696e656572696e672c20436f6d707574657220536369656e63652026616d703b20456e67696e656572696e672c20456c656374726963616c20456e67696e656572696e672c20456c656374726f6e6963732026616d703b20436f6d6d756e69636174696f6e20456e67696e656572696e672c204d656368616e6963616c20456e67696e656572696e672c2050726f64756374696f6e20456e67696e656572696e672c20496e666f726d6174696f6e20546563686e6f6c6f67792c2074686520696e7374697475746520696d706172747320696e737472756374696f6e20696e20656c6576656e20506f73746772616475617465204d2e5465636820636f757273657320626f7468206f6e20726567756c617220616e6420706172742074696d652062617369732e20412064656469636174656420726573656172636820656e7669726f6e6d656e742069732070726f766964656420746f20746865207265736561726368657273206c656164696e6720746f2050682e44206465677265652070726f6772616d6d652e3c2f703e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a6a757374696679223e546865207065727365766572616e636520616e642064656469636174696f6e206f662074686520656e7469726520737461666620697320736f2068696768207468617420697420697320656666657276657363656e7420746f2065766f6c76652070726f626c656d2d20736f6c76696e67207374726174656769657320666f7220746865206265747465726d656e74206f66207468652073747564656e74732e204e756d65726f7573206f6e676f696e672070726f6a656374732062792041494354452c4d4852442c435349522c2054455149502d49492f46495354206574632e206675727468657220656e726963682074686520666163756c747920616e642074686520696e737469747574696f6e2e2054686520636f6c6c65676520686173206265656e206772616e74656420464d20726164696f2073746174696f6e20756e64657220436f6d6d756e69747920464d20536368656d65206279207468652043656e7472652e3c2f703e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a6a757374696679223e54686520636f6c6c6567652062656c696576657320696e207374726f6e6720696e64757374727920696e7374697475746520636f6c6c61626f726174696f6e20666f72207768696368207468652074657374696e6720616e6420636f6e73756c74616e63792063656c6c2065737461626c69736865642062792074686520636f6c6c65676520776f726b73207269676f7572736c792062792073686172696e672069747320657870657274697365207769746820696e6475737472792e3c2f703e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a6a757374696679223e54686520547261696e696e6720616e642074686520506c6163656d656e742043656c6c2069732064796e616d696320616e6420696d6d6163756c61746520696e206469736368617267696e6720697473206475746965732e204d4e437320616e6420496e6469616e20436f72706f72617465206769616e7473206c696b65204d6963726f736f6674202c205443532c20574950524f202c206574632076697369742074686520636f6c6c6567652c20616e64207468652063616c69626572206f66207468652073747564656e7473206c65617665207468656d207370656c6c626f756e642e2054686520436f6c6c656765206973206163637265646974656420776974682054435320666f7220706c6163656d656e742e20436f6e73657175656e746c792c2074686520706c6163656d656e742067726170682068617320726973656e206d616e69666f6c642e205468652070726f756420616c756d6e69206f6620474e444543206172652073657276696e6720696e204941532c20504353206574632e20616e64206f6e20656d696e656e7420706f736974696f6e7320696e20696e64757374726965732026616d703b20616c736f2061646d696e697374726174696f6e20616c6c206163726f73732074686520776f726c642e2050545520686173206265656e20726567756c61726c79206177617264696e6720666972737420706f736974696f6e20746f2074686520636f6c6c65676520696e20706c6163656d656e742026616d703b2061636164656d696320706572666f726d616e636520616d6f6e6773742069747320616c6c20636f6c6c656765732e204d616a6f72697479206f66207468652061636164656d696320616e64206e6f6e2061636164656d696320776f726b206973206f6e6c696e652e20486173736c65206672656520696e666f726d6174696f6e2061636365737320616e64207175616c69747920656475636174696f6e20617265207468652068616c6c6d61726b206f662074686520636f6c6c6567652e3c2f703e0d0a0d0a3c703e486f6c697374696320646576656c6f706d656e74206f662074686520706572736f6e616c697479206f66206561636820616e642065766572792073747564656e742069732073747265737365642075706f6e20616e642074616b656e2063617265206f662e2053706f7274732c2063756c747572616c20616e64206f7468657220657874726120637572726963756c61722061637469766974696573206e75727475726520616e6420686f6e65207570207468652074616c656e74206f66207468652073747564656e74732e204f75722073747564656e747320617265207468652070726f756420616368696576657273206f66206e6f74206f6e6c79207468652061636164656d696320706f736974696f6e73206275742074686520746f706d6f7374206f6e657320696e2073706f72747320616c736f2061742074686520556e697665727369747920616e6420496e7465722d556e6976657273697479206c6576656c2e2054686520636f6c6c6567652068617320616c736f207374617465206f66207468652061727420686f7374656c20666163696c697469657320666f7220626f79732026616d703b206769726c732e3c2f703e0d0a0d0a3c70207374796c653d22746578742d616c69676e3a6a757374696679223e546865204d616e6167656d656e7420697320686967686c7920737570706f727469766520616e64206d6f74697661746f7220666f722074686520616c6c2d726f756e642067726f7774682026616d703b20646576656c6f706d656e74206f66207468652073747564656e74732c206265796f6e642074686520637572726963756c756d2c20616e64206d61696e7461696e7320636f726469616c20616e64206861726d6f6e696f75732072656c6174696f6e7368697020776974682069747320656d706c6f796565732e20492074616b652074686973206f70706f7274756e69747920746f2077656c636f6d65207468652073747564656e74732066726f6d2074686520636f7265206f66206d792068656172742c20616e642061737375726520746865697220706172656e747320746861742074686520636f6c6c6567652077696c6c2066757274686572207265676973746572207472656d656e646f75732070726f6772657373206f6e20616c6c2066726f6e74732077697468206974732073696e636572652c206465646963617465642026616d703b2070726f6772657373697665206566666f7274732e3c2f703e0d0a\''),('14','\'Campuses\'','X\'3c7072653e0d0a3c7370616e207374796c653d22666f6e742d73697a653a31367078223e3c7374726f6e673e43616d7075733c2f7374726f6e673e3c2f7370616e3e3c2f7072653e0d0a0d0a3c756c3e0d0a093c6c693e556c74696d61746520556e697665727369747920697320612063616d707573206f6e2050656e616e672049736c616e642e20497420776173206275696c74206f6e20323032302e20497420636f6e7369737473206f66206d616e79207479706573206f6620666163696c69746965732e3c2f6c693e0d0a3c2f756c3e0d0a\'');
+--
+-- Indexes for table `class_quiz`
+--
+ALTER TABLE `class_quiz`
+  ADD PRIMARY KEY (`class_quiz_id`);
 
-INSERT INTO department(department_id,department_name,dean) VALUES('4','\'Computer Science & Engineering\'','\'Dr. Parminder Singh\''),('6','\'Information Technology\'','\'Dr. K.S Mann\''),('9','\'Civil Engineering\'','\'Dr. J.N Jha\'');
+--
+-- Indexes for table `class_subject_overview`
+--
+ALTER TABLE `class_subject_overview`
+  ADD PRIMARY KEY (`class_subject_overview_id`);
 
+--
+-- Indexes for table `content`
+--
+ALTER TABLE `content`
+  ADD PRIMARY KEY (`content_id`);
 
+--
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`department_id`);
 
-INSERT INTO event(event_id,event_title,lecturer_class_id,date_start,date_end) VALUES('20','\'e\'','0','\'11/02/2023\'','\'11/03/2023\''),('21','\'Mid sem break\'','0','\'11/11/2023\'','\'11/18/2023\'');
+--
+-- Indexes for table `discussions`
+--
+ALTER TABLE `discussions`
+  ADD PRIMARY KEY (`discussion_id`);
 
+--
+-- Indexes for table `discussion_replies`
+--
+ALTER TABLE `discussion_replies`
+  ADD PRIMARY KEY (`reply_id`);
 
-INSERT INTO lecturer(lecturer_id,username,password,firstname,lastname,department_id,location,about,lecturer_status,email) VALUES('20','\'asvhini\'','\'1234\'','\'Asvhini\'','\'Subramaniam\'','4','\'uploads/hihi.jpg\'','\'\'','\'Registered\'','\'pangkheryong@gmail.com\''),('24','\'shahriman\'','\'1231\'','\'Mohd\'','\'Shahriman\'','4','\'uploads/Diananagpal.jpg\'','\'\'','\'Registered\'','\'\''),('28','\'kooleechun\'','\'1231\'','\'Koo\'','\'Lee Chun\'','6','\'uploads/ksmann-150x150.jpg\'','\'\'','\'Registered\'','\'\''),('25','\'usha\'','\'1231\'','\'Usha\'','\'Jayahkudy\'','4','\'uploads/jappreet.jpg\'','\'\'','\'Registered\'','\'\''),('26','\'wendy\'','\'1231\'','\'Wendy\'','\'Bong\'','4','\'uploads/Sukhjit.jpg\'','\'\'','\'Registered\'','\'\''),('27','\'vasuky\'','\'1231\'','\'Vasuky\'','\'Mohanan\'','4','\'uploads/poonam.jpg\'','\'\'','\'Registered\'','\'\''),('29','\'vaithegy\'','\'1231\'','\'Vaithegy\'','\'Krishnan\'','4','\'uploads/vivekthapar.jpg\'','\'\'','\'Registered\'','\'\''),('30','\'lightlau\'','\'1231\'','\'Light\'','\'Lau Teng Lye\'','9','\'uploads/JNJHA.jpg\'','\'\'','\'Registered\'','\'\''),('34','\'Katherine\'','\'kl#1234\'','\'Katherine\'','\'Lim\'','9','\'\'','\'\'','\'Registered\'','\'\''),('0','\'\'','\'\'','\'Krishnan\'','\'\'','6','\'uploads/NO-IMAGE-AVAILABLE.jpg\'','\'\'','NULL','NULL');
+--
+-- Indexes for table `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`event_id`);
 
+--
+-- Indexes for table `files`
+--
+ALTER TABLE `files`
+  ADD PRIMARY KEY (`file_id`);
 
-INSERT INTO lecturer_class(lecturer_class_id,lecturer_id,class_id,subject_id,thumbnails,school_year) VALUES('97','9','7','15','\'admin/uploads/thumbnails.jpg\'','\'2022-2023\''),('135','0','22','29','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('151','5','7','14','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('152','5','8','14','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('153','5','13','36','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('157','18','15','23','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('158','18','16','23','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('159','18','12','23','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('160','18','7','29','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('165','134','15','23','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('167','12','13','35','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('168','12','14','35','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('170','12','16','24','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('172','18','13','39','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('173','18','14','39','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('174','13','12','16','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('175','13','13','16','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('176','13','14','16','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('177','14','12','32','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('178','14','13','32','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('179','14','14','32','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('180','19','13','22','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('181','12','20','24','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('183','12','18','24','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('184','12','17','25','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('185','12','7','22','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('186','9','18','42','\'admin/uploads/thumbnails.jpg\'','\'2023-2024\''),('187','20','16','14','\'admin/uploads/thumbnails.jpg\'','\'2025-2026\'');
+--
+-- Indexes for table `lecturer`
+--
+ALTER TABLE `lecturer`
+  ADD PRIMARY KEY (`lecturer_id`);
 
-INSERT INTO lecturer_class_announcements(lecturer_class_announcements_id,content,lecturer_id,lecturer_class_id,date) VALUES('40','\'<p>hello</p>\\r\\n\'','20','187','\'2023-11-02 13:31:57\'');
+--
+-- Indexes for table `lecturer_backpack`
+--
+ALTER TABLE `lecturer_backpack`
+  ADD PRIMARY KEY (`file_id`);
 
-INSERT INTO lecturer_class_student(lecturer_class_student_id,lecturer_class_id,student_id,lecturer_id) VALUES('23','25','100','20'),('31','165','141','134'),('32','165','134','134'),('62','167','100','12'),('69','167','76','12'),('70','167','107','12'),('77','167','73','12'),('79','167','71','12'),('82','168','162','12'),('97','168','179','12'),('135','172','100','18'),('142','172','76','18'),('143','172','107','18'),('150','172','73','18'),('152','172','71','18'),('155','173','162','18'),('170','173','179','18'),('177','174','134','13'),('183','174','147','13'),('193','174','157','13'),('204','175','100','13'),('211','175','76','13'),('212','175','107','13'),('219','175','73','13'),('221','175','71','13'),('224','176','162','13'),('239','176','179','13'),('246','177','134','14'),('252','177','147','14'),('262','177','157','14'),('273','178','100','14'),('280','178','76','14'),('281','178','107','14'),('288','178','73','14'),('290','178','71','14'),('293','179','162','14'),('308','179','179','14'),('323','180','100','19'),('330','180','76','19'),('331','180','107','19'),('338','180','73','19'),('340','180','71','19'),('342','181','210','12'),('346','183','214','12'),('371','184','217','12'),('373','185','93','12'),('374','185','136','12'),('380','186','162','17'),('395','186','179','17'),('403','187','210','20'),('404','187','219','20'),('410','190','210','14'),('411','190','219','14'),('415','192','210','24'),('416','192','219','24'),('417','192','220','24'),('418','192','221','24'),('419','192','222','24'),('424','194','227','24'),('425','194','228','24'),('426','195','229','24'),('427','195','230','24'),('429','196','223','24'),('430','196','224','24'),('431','196','225','24'),('432','196','226','24'),('433','197','223','20'),('434','197','224','20'),('435','197','225','20'),('436','197','226','20'),('439','198','219','20'),('440','198','220','20'),('441','198','221','20'),('442','198','222','20'),('443','0','100','20'),('446','0','71','20'),('447','0','231','20'),('448','0','15','20'),('449','0','93','20'),('450','187','107','20'),('451','187','15','20');
+--
+-- Indexes for table `lecturer_class`
+--
+ALTER TABLE `lecturer_class`
+  ADD PRIMARY KEY (`lecturer_class_id`);
 
-INSERT INTO lecturer_notification(lecturer_notification_id,lecturer_class_id,notification,date_of_notification,link,student_id,assignment_id) VALUES('15','160','\'Submit Assignment file name <b>my_assginment</b>\'','\'2013-11-25 10:39:52\'','\'view_submit_assignment.php\'','93','16'),('17','161','\'Submit Assignment file name <b>q</b>\'','\'2013-11-25 15:54:19\'','\'view_submit_assignment.php\'','71','17'),('18','197','\'Submit Assignment file name <b>Assignment</b>\'','\'2015-12-18 21:46:08\'','\'view_submit_assignment.php\'','225','31'),('19','197','\'Add Downloadable Materials file name <b>3 Mistakes Of my life</b>\'','\'2015-12-18 21:47:46\'','\'downloadable.php\'','225','0');
+--
+-- Indexes for table `lecturer_class_announcements`
+--
+ALTER TABLE `lecturer_class_announcements`
+  ADD PRIMARY KEY (`lecturer_class_announcements_id`);
 
-INSERT INTO lecturer_shared(lecturer_shared_id,lecturer_id,shared_lecturer_id,floc,fdatein,fdesc,fname) VALUES('1','12','14','\'admin/uploads/7939_File_449E26DB.jpg\'','\'2014-02-20 09:55:32\'','\'sas\'','\'sss\'');
+--
+-- Indexes for table `lecturer_class_student`
+--
+ALTER TABLE `lecturer_class_student`
+  ADD PRIMARY KEY (`lecturer_class_student_id`);
 
-INSERT INTO message(message_id,reciever_id,content,date_sended,sender_id,reciever_name,sender_name,message_status) VALUES('2','11','\'fasf\'','\'2013-11-13 13:15:47\'','42','\'Aladin Cabrera\'','\'john kevin lorayna\'','\'\''),('4','71','\'bcjhbcjksdbckldj\'','\'2013-11-25 15:59:13\'','71','\'Noli Mendoza\'','\'Noli Mendoza\'','\'read\''),('17','12','\'tst\'','\'2013-12-01 23:38:40\'','93','\'Ruby Mae  Morante\'','\'John Kevin  Lorayna\'','\'\''),('19','12','\'fasfaf\'','\'2013-12-01 23:56:17\'','93','\'Ruby Mae  Morante\'','\'John Kevin  Lorayna\'','\'\''),('27','93','\'fa\'','\'2013-12-02 00:01:54\'','12','\'John Kevin  Lorayna\'','\'Ruby Mae  Morante\'','\'\''),('28','136','\'Submit your classcard\'','\'2014-02-13 13:35:21\'','12','\'Jorgielyn Serfino\'','\'Ruby Mae  Morante\'','\'\''),('30','20','\'Hello\'','\'2023-10-25 02:08:25\'','15','\'Parminder  Singh\'','\'Peter Pang Kher Yong\'','\'\''),('32','20','\'hello\'','\'2023-10-30 07:47:20\'','15','\'Asvhini Subramaniam\'','\'Peter Pang Kher Yong\'','\'\''),('33','15','\'hello! Peter\'','\'2023-10-30 07:47:58\'','20','\'Peter Pang Kher Yong\'','\'Asvhini Subramaniam\'','\'read\''),('34','34','\'ew\'','\'2023-10-30 19:43:20\'','24','\'Katherine Lim\'','\'Mohd Shahriman\'','\'\'');
+--
+-- Indexes for table `lecturer_notification`
+--
+ALTER TABLE `lecturer_notification`
+  ADD PRIMARY KEY (`lecturer_notification_id`);
 
-INSERT INTO message_sent(message_sent_id,reciever_id,content,date_sended,sender_id,reciever_name,sender_name) VALUES('1','42','\'sad\'','\'2013-11-12 22:50:05\'','42','\'john kevin lorayna\'','\'john kevin lorayna\''),('2','11','\'fasf\'','\'2013-11-13 13:15:47\'','42','\'Aladin Cabrera\'','\'john kevin lorayna\''),('3','12','\'bjhkcbkjsdnckldvls\'','\'2013-11-25 15:58:55\'','71','\'Ruby Mae  Morante\'','\'Noli Mendoza\''),('4','71','\'bcjhbcjksdbckldj\'','\'2013-11-25 15:59:13\'','71','\'Noli Mendoza\'','\'Noli Mendoza\''),('5','12','\'test\'','\'2013-11-30 20:54:05\'','93','\'Ruby Mae  Morante\'','\'John Kevin  Lorayna\''),('11','12','\'tst\'','\'2013-12-01 23:38:40\'','93','\'Ruby Mae  Morante\'','\'John Kevin  Lorayna\''),('12','12','\'fasfasf\'','\'2013-12-01 23:49:13\'','93','\'Ruby Mae  Morante\'','\'John Kevin  Lorayna\''),('13','136','\'Submit your classcard\'','\'2014-02-13 13:35:21\'','12','\'Jorgielyn Serfino\'','\'Ruby Mae  Morante\''),('14','20','\'sir i have uploaded the assignment please check and give Grades accordingly\\r\\n\'','\'2015-12-18 21:49:43\'','225','\'Parminder  Singh\'','\'Navdeep Singh\''),('15','20','\'Hello\'','\'2023-10-25 02:08:25\'','15','\'Parminder  Singh\'','\'Peter Pang Kher Yong\''),('16','15','\'hello\'','\'2023-10-30 07:43:05\'','20','\'Peter Pang Kher Yong\'','\'Parminder  Singh\''),('18','15','\'hello! Peter\'','\'2023-10-30 07:47:58\'','20','\'Peter Pang Kher Yong\'','\'Asvhini Subramaniam\'');
+--
+-- Indexes for table `lecturer_shared`
+--
+ALTER TABLE `lecturer_shared`
+  ADD PRIMARY KEY (`lecturer_shared_id`);
 
-INSERT INTO notification(notification_id,lecturer_class_id,notification,date_of_notification,link) VALUES('2','4','\'Add Downloadable Materials file name <b>sss</b>\'','\'2014-01-17 14:35:32\'','\'downloadable_student.php\''),('3','167','\'Add Annoucements\'','\'2014-01-17 14:36:32\'','\'announcements_student.php\''),('4','0','\'Add Downloadable Materials file name <b>test</b>\'','\'2014-02-13 11:10:56\'','\'downloadable_student.php\''),('5','167','\'Add Assignment file name <b>q</b>\'','\'2014-02-13 11:27:59\'','\'assignment_student.php\''),('6','0','\'Add Downloadable Materials file name <b>chapter 1</b>\'','\'2014-02-13 12:35:42\'','\'downloadable_student.php\''),('7','0','\'Add Downloadable Materials file name <b>q</b>\'','\'2014-02-13 12:53:09\'','\'downloadable_student.php\''),('8','0','\'Add Downloadable Materials file name <b>kevi</b>\'','\'2014-02-13 13:31:18\'','\'downloadable_student.php\''),('9','185','\'Add Practice Quiz file\'','\'2014-02-13 13:33:27\'','\'student_quiz_list.php\''),('10','167','\'Add Annoucements\'','\'2014-02-13 13:45:59\'','\'announcements_student.php\''),('11','0','\'Add Downloadable Materials file name <b>q</b>\'','\'2014-02-21 16:43:38\'','\'downloadable_student.php\''),('12','0','\'Add Downloadable Materials file name <b>q</b>\'','\'2014-02-21 16:46:18\'','\'downloadable_student.php\''),('13','0','\'Add Downloadable Materials file name <b>q</b>\'','\'2014-02-21 16:46:49\'','\'downloadable_student.php\''),('14','0','\'Add Downloadable Materials file name <b>q</b>\'','\'2014-02-21 16:52:30\'','\'downloadable_student.php\''),('15','197','\'Add Annoucements\'','\'2015-12-18 21:25:13\'','\'announcements_student.php\''),('16','197','\'Add Downloadable Materials file name <b>Notice</b>\'','\'2015-12-18 21:37:15\'','\'downloadable_student.php\''),('17','197','\'Add Assignment file name <b>Datesheet</b>\'','\'2015-12-18 21:38:31\'','\'assignment_student.php\''),('18','197','\'Add Practice Quiz file\'','\'2015-12-18 21:54:12\'','\'student_quiz_list.php\''),('19','201','\'Add Announcements\'','\'2023-10-25 04:49:59\'','\'announcements_student.php\''),('20','201','\'Add Announcements\'','\'2023-10-25 04:50:07\'','\'announcements_student.php\''),('21','197','\'Add Assignment file name <b>d</b>\'','\'2023-10-30 03:20:00\'','\'assignment_student.php\''),('22','197','\'Add Assignment file name <b>d</b>\'','\'2023-10-30 03:20:03\'','\'assignment_student.php\''),('23','0','\'Add Assignment file name <b>s</b>\'','\'2023-10-30 20:13:34\'','\'assignment_student.php\''),('24','0','\'Add Assignment file name <b>s</b>\'','\'2023-11-01 00:27:04\'','\'assignment_student.php\''),('25','0','\'Add Assignment file name <b>s</b>\'','\'2023-11-01 00:42:49\'','\'assignment_student.php\''),('26','0','\'Add Assignment file name <b>s</b>\'','\'2023-11-01 00:47:27\'','\'assignment_student.php\''),('27','0','\'Add Assignment file name <b>s</b>\'','\'2023-11-01 02:32:10\'','\'assignment_student.php\''),('28','0','\'Add Assignment file name <b>s</b>\'','\'2023-11-01 02:34:15\'','\'assignment_student.php\''),('29','0','\'Add Assignment file name <b>d</b>\'','\'2023-11-01 03:11:11\'','\'assignment_student.php\''),('30','0','\'Add Assignment file name <b>s</b>\'','\'2023-11-01 04:36:59\'','\'assignment_student.php\''),('31','0','\'Add Assignment file name <b>e</b>\'','\'2023-11-02 03:47:16\'','\'assignment_student.php\''),('32','0','\'Add Assignment file name <b>d</b>\'','\'2023-11-02 04:38:58\'','\'assignment_student.php\''),('33','0','\'Add Annoucements\'','\'2023-11-02 04:56:51\'','\'announcements_student.php\''),('34','187','\'Add Assignment file name <b>d</b>\'','\'2023-11-02 13:21:27\'','\'assignment_student.php\''),('35','187','\'Add Annoucements\'','\'2023-11-02 13:31:57\'','\'announcements_student.php\'');
+--
+-- Indexes for table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`message_id`);
 
-INSERT INTO notification_read(notification_read_id,student_id,student_read,notification_id) VALUES('1','225','\'yes\'','15'),('2','225','\'yes\'','16'),('3','225','\'yes\'','17'),('4','15','\'yes\'','20'),('5','15','\'yes\'','19'),('6','100','\'yes\'','20'),('7','100','\'yes\'','19'),('8','15','\'yes\'','23'),('9','15','\'yes\'','23'),('10','15','\'yes\'','23'),('11','15','\'yes\'','23'),('12','15','\'yes\'','14'),('13','15','\'yes\'','14'),('14','15','\'yes\'','14'),('15','15','\'yes\'','14'),('16','15','\'yes\'','13'),('17','15','\'yes\'','13'),('18','15','\'yes\'','13'),('19','15','\'yes\'','13'),('20','15','\'yes\'','12'),('21','15','\'yes\'','12'),('22','15','\'yes\'','12'),('23','15','\'yes\'','12'),('24','15','\'yes\'','11'),('25','15','\'yes\'','11'),('26','15','\'yes\'','11'),('27','15','\'yes\'','11'),('28','15','\'yes\'','8'),('29','15','\'yes\'','8'),('30','15','\'yes\'','8'),('31','15','\'yes\'','8'),('32','15','\'yes\'','7'),('33','15','\'yes\'','7'),('34','15','\'yes\'','7'),('35','15','\'yes\'','7'),('36','15','\'yes\'','6'),('37','15','\'yes\'','6'),('38','15','\'yes\'','6'),('39','15','\'yes\'','6'),('40','15','\'yes\'','4'),('41','15','\'yes\'','4'),('42','15','\'yes\'','4'),('43','15','\'yes\'','4'),('44','15','\'yes\'','30'),('45','15','\'yes\'','30'),('46','15','\'yes\'','30'),('47','15','\'yes\'','30'),('48','15','\'yes\'','29'),('49','15','\'yes\'','29'),('50','15','\'yes\'','29'),('51','15','\'yes\'','29'),('52','15','\'yes\'','28'),('53','15','\'yes\'','28'),('54','15','\'yes\'','28'),('55','15','\'yes\'','28'),('56','15','\'yes\'','27'),('57','15','\'yes\'','27'),('58','15','\'yes\'','27'),('59','15','\'yes\'','27'),('60','15','\'yes\'','26'),('61','15','\'yes\'','26'),('62','15','\'yes\'','26'),('63','15','\'yes\'','26'),('64','15','\'yes\'','25'),('65','15','\'yes\'','25'),('66','15','\'yes\'','25'),('67','15','\'yes\'','25'),('68','15','\'yes\'','24'),('69','15','\'yes\'','24'),('70','15','\'yes\'','24'),('71','15','\'yes\'','24'),('72','15','\'yes\'','31'),('73','15','\'yes\'','31'),('74','15','\'yes\'','32'),('75','15','\'yes\'','32'),('76','15','\'yes\'','32'),('77','15','\'yes\'','32'),('78','15','\'yes\'','33'),('79','15','\'yes\'','33'),('80','15','\'yes\'','33'),('81','15','\'yes\'','33');
+--
+-- Indexes for table `message_sent`
+--
+ALTER TABLE `message_sent`
+  ADD PRIMARY KEY (`message_sent_id`);
 
-INSERT INTO notification_read_lecturer(notification_read_lecturer_id,lecturer_id,student_read,notification_id) VALUES('1','12','\'yes\'','14'),('2','12','\'yes\'','13'),('3','12','\'yes\'','12'),('4','12','\'yes\'','11'),('5','12','\'yes\'','10'),('6','12','\'yes\'','9'),('7','12','\'yes\'','8'),('8','12','\'yes\'','7'),('9','20','\'yes\'','18'),('10','20','\'yes\'','19');
+--
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`notification_id`);
 
-INSERT INTO question_type(question_type_id,question_type) VALUES('1','\'Multiple Choice\''),('2','\'True or False\'');
+--
+-- Indexes for table `notification_read`
+--
+ALTER TABLE `notification_read`
+  ADD PRIMARY KEY (`notification_read_id`);
 
-INSERT INTO quiz(quiz_id,quiz_title,quiz_description,date_added,lecturer_id) VALUES('3','\'Sample Test\'','\'Test\'','\'2013-12-03 23:01:56\'','12'),('4','\'Chapter 1\'','\'topics\'','\'2013-12-13 01:51:02\'','14'),('5','\'test3\'','\'123\'','\'2014-01-16 04:12:07\'','12'),('6','\'PHP\'','\'Basics of PHP\'','\'2015-12-18 21:27:03\'','20'),('7','\'Hello\'','\'s\'','\'2023-10-29 04:13:24\'','20'),('8','\'e\'','\'w\'','\'2023-10-30 19:41:53\'','24');
+--
+-- Indexes for table `notification_read_lecturer`
+--
+ALTER TABLE `notification_read_lecturer`
+  ADD PRIMARY KEY (`notification_read_lecturer_id`);
 
-INSERT INTO quiz_question(quiz_question_id,quiz_id,question_text,question_type_id,points,date_added,answer) VALUES('33','5','\'<p>q</p>\\r\\n\'','2','0','\'2014-01-17 04:15:03\'','\'False\''),('34','3','\'<p>Php Stands for ?</p>\\r\\n\'','1','0','\'2014-01-17 12:25:17\'','\'C\''),('35','3','\'<p>Echo is a Php code that display the output.</p>\\r\\n\'','2','0','\'2014-01-17 12:26:18\'','\'True\''),('36','6','\'<p>Is php a server side language ?</p>\\r\\n\'','2','0','\'2015-12-18 21:27:33\'','\'True\''),('37','6','\'<p>PHP stand for ?</p>\\r\\n\'','1','0','\'2015-12-18 21:28:52\'','\'A\''),('38','6','\'<p>Php can&#39;t be used for Bigger Projects ?</p>\\r\\n\'','2','0','\'2015-12-18 21:30:20\'','\'False\''),('39','8','\'<p>we?<br />\\r\\nsffwq<br />\\r\\n&nbsp;</p>\\r\\n\'','1','0','\'2023-10-30 19:42:13\'','\'\'');
+--
+-- Indexes for table `question_type`
+--
+ALTER TABLE `question_type`
+  ADD PRIMARY KEY (`question_type_id`);
 
-INSERT INTO school_year(school_year_id,school_year) VALUES('2','\'2023-2024\''),('3','\'2024-2025\''),('4','\'2025-2026\'');
+--
+-- Indexes for table `quiz`
+--
+ALTER TABLE `quiz`
+  ADD PRIMARY KEY (`quiz_id`);
 
-INSERT INTO student(student_id,firstname,lastname,class_id,username,password,location,status,email) VALUES('100','\'Chng\'','\'Kai Siang\'','13','\'21100303\'','\'1234\'','\'uploads/jamila.jpg\'','\'Registered\'','\'chngkaisiang@gmail.com\''),('93','\'Bibiana\'','\'Lee Zi Ying\'','7','\'111\'','\'222\'','\'uploads/3094_384893504898082_1563225657_n.jpg\'','\'Registered\'','\'p20012724@student.newinti.edu.my\''),('76','\'Tan\'','\'Zhen Ying\'','13','\'21100555\'','\'123\'','\'uploads/maica.jpg\'','\'Registered\'','\'zhenyingtan@gmail.com\''),('107','\'Lee \'','\'Wei Shen\'','13','\'29001002\'','\'1234\'','\'uploads/harry.jpg\'','\'Registered\'','\'weishenlee@gmail.com\''),('15','\'Peter\'','\'Pang Kher Yong\'','13','\'peter2312\'','\'1234\'','\'uploads/Cat.jpg\'','\'Registered\'','\'\''),('71','\'Jason\'','\'Lee\'','13','\'21100556\'','\'noledel\'','\'uploads/noli.jpg\'','\'Registered\'','NULL'),('231','\'Ong\'','\'Chun Chee\'','17','\'12\'','\'occ1234\'','\'\'','\'Registered\'','NULL');
+--
+-- Indexes for table `quiz_question`
+--
+ALTER TABLE `quiz_question`
+  ADD PRIMARY KEY (`quiz_question_id`);
 
+--
+-- Indexes for table `school_year`
+--
+ALTER TABLE `school_year`
+  ADD PRIMARY KEY (`school_year_id`);
 
-INSERT INTO student_backpack(file_id,floc,fdatein,fdesc,student_id,fname) VALUES('1','\'admin/uploads/2658_File_kevin.docx\'','\'2014-02-13 11:11:50\'','\'test\'','210','\'test\''),('2','\'admin/uploads/5704_File_3 MISTAKES OF MY LIFE.pdf\'','\'2015-12-18 21:47:54\'','\'It is a novel by chetan bhagat\'','225','\'3 Mistakes Of my life\'');
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`student_id`);
 
-INSERT INTO student_class_quiz(student_class_quiz_id,class_quiz_id,student_id,student_quiz_time,grade) VALUES('1','15','107','\'3600\'','\'0 out of 2\''),('2','16','136','\'3600\'','\'0 out of 0\''),('3','17','225','\'3600\'','\'1 out of 3\''),('4','17','224','\'3599\'','\'1 out of 3\'');
+--
+-- Indexes for table `student_assignment`
+--
+ALTER TABLE `student_assignment`
+  ADD PRIMARY KEY (`student_assignment_id`);
 
-INSERT INTO subject(subject_id,subject_code,subject_title,category,description,unit,Pre_req,semester) VALUES('14','\'5001CEM\'','\'Advanced Algorithms\'','\'\'','X\'3c703e3c7370616e207374796c653d22666f6e742d73697a653a6d656469756d223e3c656d3e41626f757420746865205375626a6563743c2f656d3e3c2f7370616e3e3c2f703e0d0a0d0a3c703e54686973207375626a65637420636f6d70726973656120746f706963732061626f75742073797374656d7320646576656c6f706d656e742c2053444c43206d6574686f646f6c6f676965732c20436f6e6365707475616c204672616d65776f726b2c206469616772616d732073756368206173204446442c2045524420616e6420466c6f77636861727420616e642077726974696e672061207468657369732070726f706f73616c2e3c2f703e0d0a0d0a3c703e266e6273703b3c2f703e0d0a0d0a3c703e5468652070726f6a65637420726571756972656d656e7420666f722074686973207375626a656374206172653a3c2f703e0d0a0d0a3c703e43686170746572732028312d3529205468657369732050726f706f73616c3c2f703e0d0a0d0a3c703e313030252052756e6e696e672053797374656d2061742074686520656e64206f662073656d65737465723c2f703e0d0a0d0a3c703e266e6273703b3c2f703e0d0a\'','3','\'\'','\'\''),('15','\'DCS1104\'','\'Database Management\'','\'\'','X\'3c703e3c7370616e207374796c653d22666f6e742d73697a653a6d656469756d223e3c656d3e41626f757420746865205375626a6563743c2f656d3e3c2f7370616e3e3c2f703e0d0a0d0a3c703e54686973207375626a65637420697320696e74656e64656420666f722049542073747564656e747320746f20646576656c6f70206f7220656e68616e636520646174616261736520736b696c6c7320746861742077696c6c2062652062656e6566696369616c20657370656369616c6c79207768656e207573656420696e2074686520495420696e6475737472792e3c2f703e0d0a\'','3','\'\'','\'\''),('16','\'BTCS503\'','\'Programming Languages\'','\'\'','X\'3c7072653e0d0a3c7370616e207374796c653d22666f6e742d73697a653a6d656469756d223e3c656d3e41626f757420746865205375626a6563743c2f656d3e3c2f7370616e3e3c2f7072653e0d0a0d0a3c64697620636c6173733d22636f7572736572612d636f757273652d64657461696c223e4c6561726e206d616e79206f662074686520636f6e6365707473207468617420756e6465726c696520616c6c2070726f6772616d6d696e67206c616e6775616765732e20446576656c6f7020612070726f6772616d6d696e67207374796c65206b6e6f776e2061732066756e6374696f6e616c2070726f6772616d6d696e6720616e6420636f6e74726173742069742077697468206f626a6563742d6f7269656e7465642070726f6772616d6d696e672e205468726f75676820657870657269656e63652077726974696e672070726f6772616d7320616e64207374756479696e6720746872656520646966666572656e74206c616e6775616765732c206c6561726e20746865206b65792069737375657320696e2064657369676e696e6720616e64207573696e672070726f6772616d6d696e67206c616e6775616765732c2073756368206173206d6f64756c617269747920616e642074686520636f6d706c656d656e746172792062656e6566697473206f662073746174696320616e642064796e616d696320747970696e672e205468697320636f75727365206973206e65697468657220706172746963756c61726c79207468656f7265746963616c206e6f72206a7573742061626f75742070726f6772616d6d696e672073706563696669637320266e646173683b2069742077696c6c206769766520796f752061206672616d65776f726b20666f7220756e6465727374616e64696e6720686f7720746f20757365206c616e677561676520636f6e73747275637473206566666563746976656c7920616e6420686f7720746f2064657369676e20636f727265637420616e6420656c6567616e742070726f6772616d732e204279207573696e6720646966666572656e74206c616e6775616765732c20796f75206c6561726e20746f207468696e6b206d6f726520646565706c79207468616e20696e207465726d73206f662074686520706172746963756c61722073796e746178206f66206f6e65206c616e67756167652e2054686520656d706861736973206f6e2066756e6374696f6e616c2070726f6772616d6d696e6720697320657373656e7469616c20666f72206c6561726e696e6720686f7720746f20777269746520726f627573742c207265757361626c652c20636f6d706f7361626c652c20616e6420656c6567616e742070726f6772616d7320266e646173683b20696e20616e79206c616e67756167652e3c2f6469763e0d0a0d0a3c68323e266e6273703b3c2f68323e0d0a0d0a3c7072653e0d0a3c7370616e207374796c653d22666f6e742d73697a653a6d656469756d223e3c656d3e266e6273703b436f757273652053796c6c616275733c2f656d3e3c2f7370616e3e3c2f7072653e0d0a0d0a3c64697620636c6173733d22636f7572736572612d636f757273652d64657461696c223e0d0a3c756c3e0d0a093c6c693e53796e7461782076732e2073656d616e746963732076732e206964696f6d732076732e206c69627261726965732076732e20746f6f6c733c2f6c693e0d0a093c6c693e4d4c20626173696373202862696e64696e67732c20636f6e646974696f6e616c732c207265636f7264732c2066756e6374696f6e73293c2f6c693e0d0a093c6c693e5265637572736976652066756e6374696f6e7320616e64207265637572736976652074797065733c2f6c693e0d0a093c6c693e42656e6566697473206f66206e6f206d75746174696f6e3c2f6c693e0d0a093c6c693e416c67656272616963206461746174797065732c207061747465726e206d61746368696e673c2f6c693e0d0a093c6c693e5461696c20726563757273696f6e3c2f6c693e0d0a093c6c693e46697273742d636c6173732066756e6374696f6e7320616e642066756e6374696f6e20636c6f73757265733c2f6c693e0d0a093c6c693e4c65786963616c2073636f70653c2f6c693e0d0a093c6c693e4571756976616c656e636520616e6420656666656374733c2f6c693e0d0a093c6c693e506172616d657472696320706f6c796d6f72706869736d20616e6420636f6e7461696e65722074797065733c2f6c693e0d0a093c6c693e5479706520696e666572656e63653c2f6c693e0d0a093c6c693e416273747261637420747970657320616e64206d6f64756c65733c2f6c693e0d0a093c6c693e5261636b6574206261736963733c2f6c693e0d0a093c6c693e44796e616d69632076732e2073746174696320747970696e673c2f6c693e0d0a093c6c693e496d706c656d656e74696e67206c616e6775616765732c20657370656369616c6c79206869676865722d6f726465722066756e6374696f6e733c2f6c693e0d0a093c6c693e4d6163726f3c2f6c693e0d0a093c6c693e52756279206261736963733c2f6c693e0d0a093c6c693e4f626a6563742d6f7269656e7465642070726f6772616d6d696e673c2f6c693e0d0a093c6c693e50757265206f626a6563742d6f7269656e746174696f6e3c2f6c693e0d0a093c6c693e496d706c656d656e74696e672064796e616d69632064697370617463683c2f6c693e0d0a093c6c693e4d756c7469706c6520696e6865726974616e63652c20696e74657266616365732c20616e64206d6978696e733c2f6c693e0d0a093c6c693e4f4f502076732e2066756e6374696f6e616c206465636f6d706f736974696f6e20616e6420657874656e736962696c6974793c2f6c693e0d0a093c6c693e537562747970696e6720666f72207265636f7264732c2066756e6374696f6e732c20616e64206f626a656374733c2f6c693e0d0a093c6c693e537562747970696e673c2f6c693e0d0a093c6c693e436c6173732d626173656420737562747970696e673c2f6c693e0d0a093c6c693e537562747970696e672076732e20706172616d657472696320706f6c796d6f72706869736d3b20626f756e64656420706f6c796d6f72706869736d3c2f6c693e0d0a3c2f756c3e0d0a3c2f6469763e0d0a\'','3','\'\'','\'\''),('17','\'BTCS504\'','\'Design & Analysis of Algorithms\'','\'\'','X\'3c703e54686973207375626a656374206469736375737365732061626f7574207468652064657369676e20616e6420616e616c79736973206f6620616c676f726974686d732e20546869732077696c6c20696e636c75646573206368617074657273207375636820617320766172696f757320616c676f726974686d20746563686e697175657320616e6420686f7720746f20646576656c6f7020616e20656666696369656e7420616c676f726974686d2e3c2f703e0d0a\'','3','\'\'','\'\''),('22','\'5003CEM\'','\'Software Engineering\'','\'\'','X\'3c703e54686973207375626a6563742077696c6c20636f76657220616c6c2061737065637473206f6620736f66747761726520646576656c6f706d656e742e20546869732077696c6c206469736375737320766172696f7573206461746120666c6f77206469616772616d7320766172696f757320736f66747761726520646576656c6f706d656e74206d6f64656c73206574632e3c2f703e0d0a\'','3','\'\'','\'2nd\''),('23','\'IS 222\'','\'Network and Internet Technology\'','\'\'','X\'3c703e54686973207375626a6563742077696c6c207461756768742075736572732061626f757420616c6c20746865206c617465737420746563686e6f6c6f6769657320616e64206e6574776f726b696e672e2053747564656e74732077696c6c206c6561726e2061626f7574206c617465737420746563686e6f6c6f6769657320616e64206d756368206d6f72652061626f75742074686520696e7465726e65742e3c2f703e0d0a\'','3','\'\'','\'2nd\''),('24','\'BTCS505\'','\'Computer Graphics\'','\'\'','X\'3c703e436f6d70757465722047726170686963207375626a6563742077696c6c2074656163682073747564656e747320686f77207468652067726170686963732061726520726570726573656e746564206f6e2074686520542e56202c20616e6420766172696f75732072616e646572696e6720746563686e69717565732077696c6c20616c736f20626520636f766572656420756e6465722074686973207375626a6563742e3c2f703e0d0a\'','3','\'\'','\'2nd\''),('25','\'BTCSE-303\'','\'Data Structures\'','\'\'','X\'3c703e54686973207375626a6563742077696c6c207461756768742073747564656e74732061626f757420746865206461746120737472756374757265206c696b6520537461636b2c20486561702c204c696e6b6564206c69737420616e64206d616e79206d6f726520616c736f2074686520736f7274696e6720616c676f726974686d732077696c6c20626520636f766572656420696e2074686973207375626a6563742e3c2f703e0d0a\'','3','\'\'','\'2nd\''),('32','\'BTCSE-302\'','\'Digital Circuits & Logic Design\'','\'\'','X\'3c703e54686973207375626a6563742077696c6c20636f76657220746f70696373206c696b65204c6f6769632047617465732028414e442c204f522c204e414e442c20584f52293c2f703e0d0a\'','3','\'\'','\'2nd\''),('36','\'IS 324\'','\'Web Technologies\'','\'\'','X\'3c703e54686973207375626a6563742077696c6c20676976652073747564656e7473206b6e6f776c656467652061626f757420766172696f75732077656220646576656c6f706d656e74206c616e677561676573206c696b65205048502048544d4c20435353206574632e3c2f703e0d0a\'','3','\'\'','\'2nd\''),('37','\'BTCS506\'','\'Operating System\'','\'\'','X\'3c703e4f7065726174696e672073797374656d207375626a6563742077696c6c20636f76657220766172696f7573204f7065726174696e672073797374656d7320616e6420746865697220776f726b696e6720616c736f206f7468657220746f70696373206c696b65206d656d6f7279206d616e6167656d656e7420616e64207363686564756c696e672077696c6c20626520636f76657265642e3c2f703e0d0a\'','3','\'\'','\'2nd\'');
+--
+-- Indexes for table `student_backpack`
+--
+ALTER TABLE `student_backpack`
+  ADD PRIMARY KEY (`file_id`);
 
-INSERT INTO users(user_id,username,password,firstname,lastname) VALUES('14','\'james\'','\'1234\'','\'James\'','\'Pang Kher Jun\''),('16','\'peterpang\'','\'23122002\'','\'Peter\'','\'Pang Kher Yong\'');
-INSERT INTO user_log(user_log_id,username,login_date,logout_date,user_id) VALUES('1','\'admin\'','\'2013-11-01 11:57:33\'','\'2013-11-18 10:33:54\'','10'),('86','\'peterpang\'','\'2023-11-02 03:09:53\'','\'2023-11-02 04:31:42\'','16'),('87','\'james\'','\'2023-11-02 03:10:23\'','\'\'','14'),('88','\'peterpang\'','\'2023-11-02 03:23:58\'','\'2023-11-02 04:31:42\'','16'),('89','\'peterpang\'','\'2023-11-02 04:26:04\'','\'2023-11-02 04:31:42\'','16'),('90','\'peterpang\'','\'2023-11-02 15:01:39\'','\'\'','16'),('91','\'peterpang\'','\'2023-11-02 15:03:03\'','\'\'','16');
+--
+-- Indexes for table `student_class_quiz`
+--
+ALTER TABLE `student_class_quiz`
+  ADD PRIMARY KEY (`student_class_quiz_id`);
+
+--
+-- Indexes for table `student_performance`
+--
+ALTER TABLE `student_performance`
+  ADD PRIMARY KEY (`student_performance_id`);
+
+--
+-- Indexes for table `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`subject_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `user_log`
+--
+ALTER TABLE `user_log`
+  ADD PRIMARY KEY (`user_log_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `activity_log`
+--
+ALTER TABLE `activity_log`
+  MODIFY `activity_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `answer`
+--
+ALTER TABLE `answer`
+  MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+
+--
+-- AUTO_INCREMENT for table `assignment`
+--
+ALTER TABLE `assignment`
+  MODIFY `assignment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `class`
+--
+ALTER TABLE `class`
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `class_quiz`
+--
+ALTER TABLE `class_quiz`
+  MODIFY `class_quiz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `class_subject_overview`
+--
+ALTER TABLE `class_subject_overview`
+  MODIFY `class_subject_overview_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `content`
+--
+ALTER TABLE `content`
+  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `discussions`
+--
+ALTER TABLE `discussions`
+  MODIFY `discussion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `discussion_replies`
+--
+ALTER TABLE `discussion_replies`
+  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+
+--
+-- AUTO_INCREMENT for table `event`
+--
+ALTER TABLE `event`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `lecturer_backpack`
+--
+ALTER TABLE `lecturer_backpack`
+  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `lecturer_class`
+--
+ALTER TABLE `lecturer_class`
+  MODIFY `lecturer_class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
+
+--
+-- AUTO_INCREMENT for table `lecturer_class_announcements`
+--
+ALTER TABLE `lecturer_class_announcements`
+  MODIFY `lecturer_class_announcements_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `lecturer_class_student`
+--
+ALTER TABLE `lecturer_class_student`
+  MODIFY `lecturer_class_student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=459;
+
+--
+-- AUTO_INCREMENT for table `message`
+--
+ALTER TABLE `message`
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT for table `message_sent`
+--
+ALTER TABLE `message_sent`
+  MODIFY `message_sent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+
+--
+-- AUTO_INCREMENT for table `notification_read`
+--
+ALTER TABLE `notification_read`
+  MODIFY `notification_read_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+
+--
+-- AUTO_INCREMENT for table `quiz`
+--
+ALTER TABLE `quiz`
+  MODIFY `quiz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `quiz_question`
+--
+ALTER TABLE `quiz_question`
+  MODIFY `quiz_question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `school_year`
+--
+ALTER TABLE `school_year`
+  MODIFY `school_year_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `student`
+--
+ALTER TABLE `student`
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
+
+--
+-- AUTO_INCREMENT for table `student_assignment`
+--
+ALTER TABLE `student_assignment`
+  MODIFY `student_assignment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `student_backpack`
+--
+ALTER TABLE `student_backpack`
+  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `student_class_quiz`
+--
+ALTER TABLE `student_class_quiz`
+  MODIFY `student_class_quiz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `subject`
+--
+ALTER TABLE `subject`
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `user_log`
+--
+ALTER TABLE `user_log`
+  MODIFY `user_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
