@@ -1,9 +1,7 @@
 <?php include('header_dashboard.php'); ?>
 <?php include('session.php'); ?>
 <?php $get_id = $_GET['id']; ?>
-<?php
- $get_id1 = $_POST['id'];
-?>
+<?php $get_id1 = isset($_POST['id']) ? $_POST['id'] : null; ?>
 
 <body>
     <?php include('navbar_lecturer.php'); ?>
@@ -40,30 +38,38 @@
                                 <br>
                                 <form method="post">
                                     <?php
-                                    $query_discussion = mysqli_query($connection, "SELECT * from discussions
-                                        WHERE lecturer_id = '$session_id' AND discussion_id = '$get_id1' AND lecturer_class_id = '$get_id'") or die(mysqli_error($connection));
-                                    $row = mysqli_fetch_array($query_discussion);
-                                    $id = $row['discussion_id'];
+                                    if (!empty($get_id1)) {
+                                        $query_discussion = mysqli_query($connection, "SELECT * from discussions
+                                            WHERE lecturer_id = '$session_id' AND discussion_id = '$get_id1' AND lecturer_class_id = '$get_id'") or die(mysqli_error($connection));
+                                        $row = mysqli_fetch_array($query_discussion);
+                                        $id = $row['discussion_id'];
                                     ?>
-                                    <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                    <textarea name="content" id="ckeditor_full">
-                                        <?php echo $row['content']; ?>
-                                    </textarea>
-                                    <br>
-                                    <button name="edit" class="btn btn-info"><i class="icon-check icon-large"></i> Save Changes</button>
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                        <textarea name="content" id="ckeditor_full"><?php echo htmlspecialchars($row['content']); ?></textarea>
+                                        <br>
+                                        <button name="edit" class="btn btn-info"><i class="icon-check icon-large"></i> Save Changes</button>
+                                    <?php
+                                    } else {
+                                        echo "Invalid discussion ID.";
+                                    }
+                                    ?>
                                 </form>
                             </div>
                             <?php
                             if (isset($_POST['edit'])) {
-                                $content = $_POST['content'];
-                                $id = $_POST['id'];
+                                $content = isset($_POST['content']) ? $_POST['content'] : null;
+                                $id = isset($_POST['id']) ? $_POST['id'] : null;
 
-                                mysqli_query($connection, "UPDATE discussions SET content = '$content' WHERE discussion_id = '$id'") or die(mysqli_error($connection));
+                                if (!empty($content) && !empty($id)) {
+                                    mysqli_query($connection, "UPDATE discussions SET content = '$content' WHERE discussion_id = '$id'") or die(mysqli_error($connection));
                                 ?>
-                                <script>
-                                    window.location = 'discussion_board_lecturer.php<?php echo '?id=' . $get_id; ?>';
-                                </script>
+                                    <script>
+                                        window.location = 'discussion_board_lecturer.php<?php echo '?id=' . $get_id; ?>';
+                                    </script>
                             <?php
+                                } else {
+                                    echo "";
+                                }
                             }
                             ?>
                         </div>
@@ -77,3 +83,4 @@
     <?php include('script.php'); ?>
 </body>
 </html>
+
