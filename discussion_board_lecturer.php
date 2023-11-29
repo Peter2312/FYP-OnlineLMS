@@ -2,6 +2,12 @@
 <?php include('session.php'); ?>
 <?php $get_id = $_GET['id']; ?>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <body>
     <?php include('navbar_lecturer.php'); ?>
     <div class="container-fluid">
@@ -81,7 +87,7 @@
                                     <strong><i class="icon-calendar"></i> <?php echo $row['date_created']; ?></strong>
 
                                     <div class="pull-right">
-                                        <a class="btn btn-link" href="#<?php echo $id; ?>" data-toggle="modal"><i class="icon-remove"></i> Remove Discussion</a>
+                                        <a class="btn btn-link remove" id="<?php echo $id; ?>" href="#removeDiscussionModal" data-toggle="modal"><i class="icon-remove"></i> Remove Discussion</a>
                                     </div>
 
                                     <div class="pull-right">
@@ -91,21 +97,25 @@
                                         </form>
                                     </div>
 
-                                    <!-- Form for posting discussion replies (both students and lecturers) -->
+                                   <!-- Form for posting discussion replies (both students and lecturers) -->
                                     <form method="post">
                                         <textarea name="reply_content" id="ckeditor_reply_<?php echo $id; ?>"></textarea>
+                                        <input type="hidden" name="discussion_id" value="<?php echo $id; ?>"> <!-- Add hidden input for discussion_id -->
                                         <br>
                                         <button name="post_reply" class="btn btn-info"><i class="icon-check icon-large"></i> Post Reply</button>
                                     </form>
+
                                     <?php
                                     if (isset($_POST['post_reply'])) {
                                         $reply_content = $_POST['reply_content'];
+                                        $discussion_id = $_POST['discussion_id']; // Retrieve the discussion ID from the form
+
                                         $user_id = (isset($_SESSION['student_id']) ? $_SESSION['student_id'] : (isset($_SESSION['lecturer_id']) ? $_SESSION['lecturer_id'] : '')); // Get the user's ID
                                         $user_type = (isset($_SESSION['student_id']) ? 'student' : (isset($_SESSION['lecturer_id']) ? 'lecturer' : '')); // Determine the user type
-                                        
-                                        // Insert the reply into the discussion_replies table
+
+                                        // Insert the reply into the discussion_replies table with the correct discussion ID
                                         mysqli_query($connection, "INSERT INTO discussion_replies (discussion_id, student_id, lecturer_id, reply_content, date_replied)
-                                        VALUES ('$id', " . ($user_type === 'student' ? $user_id : "''") . ", " . ($user_type === 'lecturer' ? $user_id : "''") . ", '$reply_content', NOW())") or die(mysqli_error($connection));
+                                            VALUES ('$discussion_id', " . ($user_type === 'student' ? $user_id : "''") . ", " . ($user_type === 'lecturer' ? $user_id : "''") . ", '$reply_content', NOW())") or die(mysqli_error($connection));
                                     }
                                     ?>
 
@@ -135,12 +145,35 @@
                                     <!-- End student and lecturer replies -->
 
                                 </div>
+                                <?php include("remove_discussion_modal.php"); ?>
                                 <?php } ?>
                             </div>
                         </div>
                     </div>
                     <!-- End Block for viewing discussion threads and replies -->
                 </div>
+                <script type="text/javascript">
+        $(document).ready(function () {
+            $('.remove').click(function () {
+                var id = $(this).attr("id");
+                $.ajax({
+                    type: "POST",
+                    url: "remove_discussion.php",
+                    data: ({id: id}),
+                    cache: false,
+                    success: function (html) {
+                        $("#del" + id).fadeOut('slow', function () {
+                            $(this).remove();
+                        });
+                        $('#removeDiscussionModal').modal('hide');
+                        $.jGrowl("Discussion Board Successfully Deleted", {header: 'Discussion Board Deleted'});
+                    }
+                });
+
+                return false;
+            });
+        });
+    </script>
             </div>
         </div>
 
