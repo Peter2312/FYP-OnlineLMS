@@ -2,6 +2,7 @@
 					<h3 class="form-signin-heading"><i class="icon-lock"></i> Sign up as lecturer</h3>
 					<input type="text" class="input-block-level"  name="firstname" placeholder="Firstname" required>
 					<input type="text" class="input-block-level"  name="lastname" placeholder="Lastname" required>
+					<input type="text" class="input-block-level" id="email" name="email" placeholder="Email" required>
 					<label>Department</label>
 					<select name="department_id" class="input-block-level span12">
 						<option></option>
