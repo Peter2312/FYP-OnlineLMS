@@ -60,7 +60,7 @@ if (isset($_POST['reset_password'])) {
     $result = mysqli_query($connection, $query);
 
     if (mysqli_num_rows($result) == 1) {
-        $update_query = "UPDATE student SET password = '$hashed_password' WHERE email = '$email'";
+        $update_query = "UPDATE student SET password = '$temporary_password' WHERE email = '$email'";
 
         if (mysqli_query($connection, $update_query)) {
             sendEmail($email, $temporary_password);
@@ -74,7 +74,7 @@ if (isset($_POST['reset_password'])) {
         $result = mysqli_query($connection, $query);
 
         if (mysqli_num_rows($result) == 1) {
-            $update_query = "UPDATE lecturer SET password = '$hashed_password' WHERE email = '$email'";
+            $update_query = "UPDATE lecturer SET password = '$temporary_password' WHERE email = '$email'";
 
             if (mysqli_query($connection, $update_query)) {
                 sendEmail($email, $temporary_password);
