@@ -68,20 +68,22 @@ if (isset($_POST['reset_password'])) {
         } else {
             echo "Password reset failed for students. Please try again later.";
         }
-    }
+    } else {
+        // Check if the email exists in the lecturer table
+        $query = "SELECT email FROM lecturer WHERE email = '$email'";
+        $result = mysqli_query($connection, $query);
 
-    // Check if the email exists in the lecturer table
-    $query = "SELECT email FROM lecturer WHERE email = '$email'";
-    $result = mysqli_query($connection, $query);
+        if (mysqli_num_rows($result) == 1) {
+            $update_query = "UPDATE lecturer SET password = '$hashed_password' WHERE email = '$email'";
 
-    if (mysqli_num_rows($result) == 1) {
-        $update_query = "UPDATE lecturer SET password = '$hashed_password' WHERE email = '$email'";
-
-        if (mysqli_query($connection, $update_query)) {
-            sendEmail($email, $temporary_password);
-            echo "A temporary password has been sent to your email. Please check your inbox and spam folder.";
+            if (mysqli_query($connection, $update_query)) {
+                sendEmail($email, $temporary_password);
+                echo "A temporary password has been sent to your email. Please check your inbox and spam folder.";
+            } else {
+                echo "Password reset failed for lecturers. Please try again later.";
+            }
         } else {
-            echo "Password reset failed for lecturers. Please try again later.";
+            echo "Email not found in records. Please check if the entered email is correct and try again later.";
         }
     }
 
